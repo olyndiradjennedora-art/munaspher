@@ -1,6 +1,43 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap');
+
+/* Local fonts: Arvo (display) and Google Sans (variable) */
+@font-face {
+  font-family: 'Arvo';
+  src: url('./assets/fonts/Arvo/Arvo-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Arvo';
+  src: url('./assets/fonts/Arvo/Arvo-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Arvo';
+  src: url('./assets/fonts/Arvo/Arvo-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('./assets/fonts/Google_Sans/GoogleSans-VariableFont_GRAD,opsz,wght.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Google Sans';
+  src: url('./assets/fonts/Google_Sans/GoogleSans-Italic-VariableFont_GRAD,opsz,wght.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -56,44 +93,44 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.13 0.02 265);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.13 0.02 265);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.13 0.02 265);
-  --primary: oklch(0.30 0.12 280);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.96 0.007 248);
-  --secondary-foreground: oklch(0.21 0.04 266);
-  --muted: oklch(0.96 0.007 248);
-  --muted-foreground: oklch(0.55 0.04 257);
-  --accent: oklch(0.96 0.007 248);
-  --accent-foreground: oklch(0.21 0.04 266);
-  --destructive: oklch(0.58 0.25 27);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.92 0.01 256);
-  --input: oklch(0.92 0.01 256);
-  --ring: oklch(0.70 0.04 257);
-  --chart-1: oklch(0.65 0.22 41);
-  --chart-2: oklch(0.60 0.12 185);
-  --chart-3: oklch(0.40 0.07 227);
-  --chart-4: oklch(0.83 0.19 84);
-  --chart-5: oklch(0.77 0.19 70);
-  --sidebar: oklch(0.98 0 0);
-  --sidebar-foreground: oklch(0.13 0.02 265);
-  --sidebar-primary: oklch(0.21 0.04 266);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.96 0.007 248);
-  --sidebar-accent-foreground: oklch(0.21 0.04 266);
-  --sidebar-border: oklch(0.92 0.01 256);
-  --sidebar-ring: oklch(0.70 0.04 257);
+  --background: #000000; /* black background */
+  --foreground: #ffffff; /* white text */
+  --card: #0b0b0b;
+  --card-foreground: #ffffff;
+  --popover: #0b0b0b;
+  --popover-foreground: #ffffff;
+  --primary: #F26522; /* orange accent */
+  --primary-foreground: #ffffff;
+  --secondary: #4AB8D8; /* brand blue */
+  --secondary-foreground: #01212a;
+  --muted: #111111;
+  --muted-foreground: #bfbfbf;
+  --accent: #4AB8D8;
+  --accent-foreground: #01212a;
+  --destructive: #d64545;
+  --destructive-foreground: #ffffff;
+  --border: #1f1f1f;
+  --input: #1f1f1f;
+  --ring: #2a6f85;
+  --chart-1: #f6a26b;
+  --chart-2: #4AB8D8;
+  --chart-3: #125C7A;
+  --chart-4: #f2c56a;
+  --chart-5: #e89b5a;
+  --sidebar: #050505;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #4AB8D8;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #F26522;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #1f1f1f;
+  --sidebar-ring: #2a6f85;
 
-  --lime: oklch(0.88 0.19 105);
-  --lime-foreground: oklch(0.18 0.04 265);
-  --hero-bg: oklch(0.22 0.10 280);
-  --hero-foreground: oklch(0.98 0 0);
-  --section-light: oklch(0.98 0 0);
+  --lime: #F26522;
+  --lime-foreground: #ffffff;
+  --hero-bg: #125C7A;
+  --hero-foreground: #ffffff;
+  --section-light: #0b0b0b;
 
   --font-display: 'Arvo', serif;
   --font-body: 'Google Sans', 'DM Sans', -apple-system, sans-serif;
@@ -110,10 +147,13 @@
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Fluid base size for adaptive / fluid-look typography */
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.05rem);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-body);
+    /* Use display font for headings */
+    font-family: var(--font-display);
   }
 }
 

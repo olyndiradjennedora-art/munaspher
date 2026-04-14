@@ -68,7 +68,7 @@ export function BlogSection() {
                     <div className="w-6 h-6 rounded-full bg-muted" />
                     <span className="text-xs font-semibold tracking-wider">JACKSON POT</span>
                   </div>
-                  <a href="#" className="flex items-center gap-1 text-xs font-semibold tracking-wider hover:text-lime transition-colors">
+                  <a href="/blog" className="flex items-center gap-1 text-xs font-semibold tracking-wider hover:text-lime transition-colors">
                     More Details <ArrowUpRight className="w-3 h-3" />
                   </a>
                 </div>

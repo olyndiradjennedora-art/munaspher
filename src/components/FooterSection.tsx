@@ -4,12 +4,12 @@ import { Logo } from "./Logo";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const footerLinks = [
-  { title: "", items: ["HOME", "PAGES", "SHOP", "BLOG", "CONTACT"] },
-  { title: "", items: ["ABOUT US", "FEATURES", "PORTFOLIO", "PRICING", "BLOGS", "BLOG SINGLE"] },
-  { title: "", items: ["CONTACT", "STYLE GUIDE", "CHANGELOG", "LICENSES", "404 & ERROR PAGE"] },
+  { title: "", items: ["ACCUEIL", "A PROPOS", "SERVICES", "PUBLICATIONS", "NOUS CONTACTER"] },
+  { title: "", items: ["A PROPOS", "FEATURES", "PORTFOLIO", "PRICING", "BLOGS"] },
+  { title: "", items: ["CONTACT", "STYLE GUIDE", "CHANGELOG", "LICENSES"] },
 ];
 
-const bottomCategories = ["LET'S CHAT", "CONTACT US", "PRODUCTIVE", "TEST WORK", "IMPLEMENTATION"];
+const bottomCategories = ["CONTACTEZ-NOUS", "SERVICES", "PORTFOLIO", "IMPLEMENTATION"];
 
 export function FooterSection() {
   return (
@@ -28,11 +28,11 @@ export function FooterSection() {
             <div>
               <Logo className="text-hero-foreground" />
               <p className="mt-4 text-xs text-hero-foreground/60 leading-relaxed tracking-wider uppercase" style={{ fontFamily: 'var(--font-body)' }}>
-                CREATIVE STUDIO TURNING IDEAS DESIGNS FROM BRANDING DIGITAL SOLUTIONS EXPERIENCES INSPIRE & DRIVE SUCCESS.
+                Agence leader en marketing et communication digitale en République Centrafricaine.
               </p>
               <div className="flex gap-3 mt-6">
                 {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
-                  <a key={i} href="#" className="w-8 h-8 rounded-full bg-hero-foreground/20 flex items-center justify-center hover:bg-lime hover:text-lime-foreground transition-colors">
+                  <a key={i} href="/contact" className="w-8 h-8 rounded-full bg-hero-foreground/20 flex items-center justify-center hover:bg-lime hover:text-lime-foreground transition-colors">
                     <Icon className="w-3.5 h-3.5" />
                   </a>
                 ))}
@@ -44,7 +44,17 @@ export function FooterSection() {
                 <ul className="space-y-3">
                   {col.items.map((item) => (
                     <li key={item}>
-                      <a href="#" className="text-xs tracking-widest text-hero-foreground/60 hover:text-lime transition-colors uppercase" style={{ fontFamily: 'var(--font-body)' }}>
+                      <a href={
+                        item === 'HOME' ? '/' :
+                        item === 'PAGES' || item === 'ABOUT US' ? '/about' :
+                        item === 'PORTFOLIO' ? '/projects' :
+                        item === 'SHOP' ? '/services' :
+                        item === 'BLOG' || item === 'BLOGS' ? '/blog' :
+                        item === 'CONTACT' ? '/contact' :
+                        item === 'PRIVACY POLICY' ? '/privacy' :
+                        item === 'TERM OF SERVICE' ? '/terms' :
+                        '#'
+                      } className="text-xs tracking-widest text-hero-foreground/60 hover:text-lime transition-colors uppercase" style={{ fontFamily: 'var(--font-body)' }}>
                         {item}
                       </a>
                     </li>
@@ -69,10 +79,10 @@ export function FooterSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              GET IN TOUCH
+              NOUS CONTACTER
             </motion.h2>
             <motion.a
-              href="#"
+              href="/contact"
               className="lime-btn px-6 py-3 text-sm absolute right-8 bottom-4 -rotate-12"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -80,7 +90,7 @@ export function FooterSection() {
               transition={{ duration: 0.5, delay: 0.3 }}
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              BOOK DISCOVERY CALL
+              PRENDRE CONTACT
             </motion.a>
           </div>
         </div>
@@ -98,7 +108,7 @@ export function FooterSection() {
           <div className="flex gap-6 mt-2 md:mt-0">
             <a href="#" className="hover:text-hero-foreground transition-colors">PRIVACY POLICY</a>
             <span>|</span>
-            <a href="#" className="hover:text-hero-foreground transition-colors">TERM OF SERVICE</a>
+            <a href="/terms" className="hover:text-hero-foreground transition-colors">TERM OF SERVICE</a>
           </div>
         </div>
       </div>

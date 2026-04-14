@@ -63,7 +63,7 @@ export function TeamSection() {
                     {[Share2, Facebook, Twitter, Linkedin].map((Icon, j) => (
                       <a
                         key={j}
-                        href="#"
+                        href="/contact"
                         className="w-8 h-8 rounded-full bg-lime flex items-center justify-center text-lime-foreground hover:scale-110 transition-transform"
                       >
                         <Icon className="w-3.5 h-3.5" />

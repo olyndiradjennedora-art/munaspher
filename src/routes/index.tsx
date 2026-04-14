@@ -13,10 +13,10 @@ import { FooterSection } from "@/components/FooterSection";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "PODMO — Digital Marketing Agency" },
-      { name: "description", content: "Crafting digital design & development. A creative studio turning ideas into powerful digital solutions." },
-      { property: "og:title", content: "PODMO — Digital Marketing Agency" },
-      { property: "og:description", content: "Crafting digital design & development." },
+      { title: "MUNA'SPHERE-RCA — Agence de Communication & Marketing Digital" },
+      { name: "description", content: "Agence leader en marketing et communication digitale en République Centrafricaine." },
+      { property: "og:title", content: "MUNA'SPHERE-RCA — Agence de Communication & Marketing Digital" },
+      { property: "og:description", content: "Agence leader en marketing et communication digitale." },
     ],
   }),
   component: Index,

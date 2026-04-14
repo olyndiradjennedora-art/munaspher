@@ -1,7 +1,15 @@
 import { Logo } from "./Logo";
 import { ArrowUpRight } from "lucide-react";
 
-const navItems = ["HOME", "PAGES", "PORTFOLIO", "SHOP", "BLOG", "CONTACT"];
+const navItems = [
+  { label: 'ACCUEIL', href: '/' },
+  { label: 'A PROPOS', href: '/about' },
+  { label: 'SERVICES', href: '/services' },
+  { label: 'REALISATIONS', href: '/projects' },
+  { label: 'PUBLICATIONS', href: '/blog' },
+  { label: 'EQUIPE', href: '/team' },
+  { label: 'NOUS CONTACTER', href: '/contact' },
+];
 
 export function Header() {
   return (
@@ -11,18 +19,18 @@ export function Header() {
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <a
-              key={item}
-              href="#"
+              key={item.label}
+              href={item.href}
               className="text-xs font-semibold tracking-widest text-hero-foreground/70 hover:text-hero-foreground transition-colors uppercase"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              {item}
+              {item.label}
             </a>
           ))}
         </nav>
-        <a href="#contact" className="lime-btn px-5 py-2.5 text-sm">
+        <a href="/contact" className="lime-btn px-5 py-2.5 text-sm">
           <ArrowUpRight className="w-4 h-4" />
-          LET'S TALK
+          NOUS CONTACTER
         </a>
       </div>
     </header>

@@ -45,7 +45,7 @@ export function ProjectsSection() {
             PROJECTS
           </motion.h2>
           <motion.a
-            href="#"
+            href="/contact"
             className="lime-btn px-6 py-3 text-sm absolute right-0 bottom-4 -rotate-12"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -75,7 +75,7 @@ export function ProjectsSection() {
                   <span key={tag} className="lime-badge text-[0.6rem]">{tag}</span>
                 ))}
               </div>
-              <a href="#" className="lime-btn w-10 h-10 rounded-full flex items-center justify-center absolute -top-12 left-0">
+              <a href="/projects" className="lime-btn w-10 h-10 rounded-full flex items-center justify-center absolute -top-12 left-0">
                 <span className="text-[0.5rem] font-bold">SEE →<br />PROJECT</span>
               </a>
             </div>

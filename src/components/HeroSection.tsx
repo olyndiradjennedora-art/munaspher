@@ -16,11 +16,11 @@ export function HeroSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto w-full px-8">
         <div className="flex items-start gap-4 mb-12">
-          <a href="#" className="lime-badge flex items-center gap-1">
-            LINKEDIN.COM <ArrowUpRight className="w-3 h-3" />
+          <a href="/team" className="lime-badge flex items-center gap-1">
+            EQUIPE <ArrowUpRight className="w-3 h-3" />
           </a>
-          <a href="#" className="lime-badge flex items-center gap-1">
-            FACEBOOK.COM <ArrowUpRight className="w-3 h-3" />
+          <a href="/about" className="lime-badge flex items-center gap-1">
+            A PROPOS <ArrowUpRight className="w-3 h-3" />
           </a>
         </div>
 
@@ -38,9 +38,7 @@ export function HeroSection() {
                 fontFamily: 'var(--font-body)',
               }}
             >
-              DIGITAL<br />
-              MARKETING<br />
-              AGENCY
+              MUNA'SPHERE-RCA
             </h1>
           </motion.div>
 
@@ -50,15 +48,8 @@ export function HeroSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {["DIGITAL AGENCY", "PRODUCT & MARKETING", "BASED IN CALIFORNIA"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="flex items-center gap-2 text-hero-foreground/70 text-xs font-semibold tracking-wider hover:text-hero-foreground transition-colors"
-              >
-                {item} <ArrowUpRight className="w-3 h-3" />
-              </a>
-            ))}
+            <p className="text-hero-foreground/80">Agence leader en marketing et communication digitale en République Centrafricaine.</p>
+            <a href="/services" className="lime-btn px-6 py-3 mt-4 inline-flex items-center gap-2">Découvrir nos services <ArrowUpRight className="w-4 h-4" /></a>
 
             <div className="pt-8 flex items-center gap-3">
               <div className="w-6 h-6 flex items-center justify-center">
@@ -67,7 +58,7 @@ export function HeroSection() {
                 </svg>
               </div>
               <span className="text-hero-foreground text-sm font-bold tracking-wider uppercase">
-                CRAFTING DIGITAL<br />DESIGN & DEVELOPMENT
+                Agence leader en marketing et communication digitale
               </span>
             </div>
           </motion.div>

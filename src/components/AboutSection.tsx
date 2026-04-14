@@ -41,7 +41,7 @@ export function AboutSection() {
           </motion.div>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            <a href="#" className="lime-btn w-32 h-32 rounded-full flex flex-col items-center justify-center text-xs">
+            <a href="/team" className="lime-btn w-32 h-32 rounded-full flex flex-col items-center justify-center text-xs">
               GET TO <ArrowUpRight className="w-4 h-4" /> KNOW US
             </a>
             <div>

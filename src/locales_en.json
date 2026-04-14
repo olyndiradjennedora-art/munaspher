@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "blog": "Blog",
+    "team": "Team",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "MUNA'SPHERE-RCA",
+    "tagline": "DARE TO TAKE ACTION",
+    "description": "A leading communication and digital marketing agency in the Central African Republic."
+  }
+}

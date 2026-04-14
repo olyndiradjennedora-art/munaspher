@@ -26,7 +26,7 @@ export function Logo({ className = "" }: { className?: string }) {
         <circle cx="36" cy="36" r="4" fill="#4AB8D8" opacity=".7" />
       </svg>
       <span className="font-bold text-lg tracking-wider uppercase" style={{ fontFamily: 'var(--font-display)' }}>
-        PODMO
+        MUNA'SPHERE-RCA
       </span>
     </div>
   );
