@@ -1,19 +1,40 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "@/components/Header";
+import { HeroSection } from "@/components/HeroSection";
+import { AboutSection } from "@/components/AboutSection";
+import { ServicesSection } from "@/components/ServicesSection";
+import { StatsSection } from "@/components/StatsSection";
+import { ProjectsSection } from "@/components/ProjectsSection";
+import { TeamSection } from "@/components/TeamSection";
+import { TestimonialSection } from "@/components/TestimonialSection";
+import { BlogSection } from "@/components/BlogSection";
+import { FooterSection } from "@/components/FooterSection";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "PODMO — Digital Marketing Agency" },
+      { name: "description", content: "Crafting digital design & development. A creative studio turning ideas into powerful digital solutions." },
+      { property: "og:title", content: "PODMO — Digital Marketing Agency" },
+      { property: "og:description", content: "Crafting digital design & development." },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Index() {
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="bg-background">
+      <Header />
+      <HeroSection />
+      <AboutSection />
+      <ServicesSection />
+      <StatsSection />
+      <ProjectsSection />
+      <TeamSection />
+      <TestimonialSection />
+      <BlogSection />
+      <FooterSection />
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
