@@ -1,18 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CategoryBar } from "./CategoryBar";
 import serviceBrand from "@/assets/service-brand.jpg";
-
-const services = [
-  { num: "01.", name: "INTERNET APPS", desc: "Driven and attentive team offering creative talent, expert eros luctus vehicula." },
-  { num: "02.", name: "BRAND IDENTITY", desc: "Experience, Genesis are a passionate, driven and attentive team offering creative luctus.", bold: true },
-  { num: "03.", name: "STRATEGY", desc: "Offering creative talent, expert eros luctus vehicula in meus eu massa." },
-  { num: "04.", name: "CREATIVE IDENTITY", desc: "Creative talent, expert eros luctus vehicula in sed diam Mauris a meus eu massa." },
-  { num: "05.", name: "WEBDIGITAL PLATFORMS", desc: "Driven and attentive team offering creative talent, expert eros luctus vehicula in sed diam Mauris." },
-];
+import client from "@/lib/sanity";
 
 export function ServicesSection() {
-  const [hovered, setHovered] = useState<number | null>(1);
+  const [hovered, setHovered] = useState<number | null>(null);
+  const [services, setServices] = useState<any[]>([]);
+
+  useEffect(() => {
+    client
+      .fetch('*[_type == "service"]{_id, title, slug, category, description, icon}')
+      .then((data: any[]) => setServices(data || []))
+      .catch(() => setServices([]));
+  }, []);
+
+  const list = services.length ? services : [
+    { title: 'Création & Design', description: 'Création de logos, design graphique' },
+    { title: 'Média & Production', description: 'Impression, gadgets, achat d\'espace' },
+    { title: 'Digital', description: 'Stratégie et exécution de campagnes digitales' },
+  ];
 
   return (
     <section className="py-24 px-8 bg-background">
@@ -29,25 +36,25 @@ export function ServicesSection() {
         <CategoryBar />
 
         <div className="mt-8">
-          {services.map((service, i) => (
+          {list.map((service, i) => (
             <div
-              key={i}
+              key={service._id || i}
               className="service-row group cursor-pointer"
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
               <span className="text-sm text-muted-foreground" style={{ fontFamily: 'var(--font-body)' }}>
-                {service.num}
+                {i < 9 ? `0${i + 1}.` : `${i + 1}.`}
               </span>
               <span
                 className={`text-lg tracking-wider ${service.bold || hovered === i ? 'font-black' : 'font-medium'}`}
                 style={{ fontFamily: 'var(--font-body)' }}
               >
-                {service.name}
+                {service.title}
               </span>
               <div className="flex items-center gap-4">
                 <p className="text-sm text-muted-foreground" style={{ fontFamily: 'var(--font-body)' }}>
-                  {service.desc}
+                  {service.description}
                 </p>
                 {hovered === i && (
                   <motion.img
@@ -69,3 +76,4 @@ export function ServicesSection() {
     </section>
   );
 }
+

@@ -1,23 +1,38 @@
 import { motion } from "framer-motion";
 import { Facebook, Twitter, Linkedin, Share2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CategoryBar } from "./CategoryBar";
 import team1 from "@/assets/team-1.jpg";
 import team2 from "@/assets/team-2.jpg";
 import team3 from "@/assets/team-3.jpg";
 import team4 from "@/assets/team-4.jpg";
+import client from "@/lib/sanity";
 
 const teamCategories = ["CREATIVE", "TEAM", "PRODUCTIVE", "TEST WORK", "IMPLEMENTATION"];
 
-const members = [
-  { name: "BENJAMIN EVALENT", role: "UX DESIGNER", image: team1 },
-  { name: "QUICHE HOLLANDAISE", role: "LEAD DEVELOPER", image: team2 },
-  { name: "BARTHOLOMEW SHOE", role: "DATA ANALYST", image: team3 },
-  { name: "FLEECE MARIGOLD", role: "UX DESIGNER", image: team4 },
+const fallbackMembers = [
+  { name: "NJANJO EDIMO", role: "Directeur Général", image: team1 },
+  { name: "Jackie BAMENGUE", role: "Responsable Commercial", image: team2 },
+  { name: "Cecy Cédric LOUTOMO", role: "Responsable Digital", image: team3 },
+  { name: "Junior MAIMO", role: "Graphiste", image: team4 },
 ];
 
 export function TeamSection() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [members, setMembers] = useState<any[]>(fallbackMembers);
+
+  useEffect(() => {
+    client
+      .fetch('*[_type == "teamMember"]{_id, name, role, "photoUrl": photo.asset->url}')
+      .then((data: any[]) => {
+        if (data && data.length) {
+          setMembers(
+            data.map((m) => ({ name: m.name, role: m.role, image: m.photoUrl || team1 })),
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <section className="py-24 px-8 bg-background">
@@ -29,14 +44,14 @@ export function TeamSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          OUR TEAM
+          EQUIPE
         </motion.h2>
         <CategoryBar items={teamCategories} />
 
         <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
           {members.map((member, i) => (
             <motion.div
-              key={i}
+              key={member.name + i}
               className="group cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

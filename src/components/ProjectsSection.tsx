@@ -1,12 +1,14 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CategoryBar } from "./CategoryBar";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
+import client from "@/lib/sanity";
 
 const projectCategories = ["WORKS", "PROCESS", "BRAND IDENTITY", "TEST WORK", "IMPLEMENTATION"];
 
-const projects = [
+const fallbackProjects = [
   {
     image: project1,
     tags: ["MARKETING", "AGENCY"],
@@ -31,6 +33,27 @@ const projects = [
 ];
 
 export function ProjectsSection() {
+  const [projects, setProjects] = useState<any[]>(fallbackProjects);
+
+  useEffect(() => {
+    client
+      .fetch('*[_type == "project"] | order(publishedAt desc){_id, title, client, description, "mainImageUrl": mainImage.asset->url}')
+      .then((data: any[]) => {
+        if (data && data.length) {
+          setProjects(
+            data.map((p) => ({
+              image: p.mainImageUrl || project1,
+              tags: p.tags || [],
+              title: p.title,
+              width: 800,
+              height: 800,
+            })),
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <section className="py-24 px-8 bg-background">
       <div className="max-w-7xl mx-auto">
@@ -71,7 +94,7 @@ export function ProjectsSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
             <div className="absolute bottom-6 left-6">
               <div className="flex gap-2 mb-2">
-                {projects[0].tags.map((tag) => (
+                {projects[0].tags.map((tag: string) => (
                   <span key={tag} className="lime-badge text-[0.6rem]">{tag}</span>
                 ))}
               </div>
@@ -95,7 +118,7 @@ export function ProjectsSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
                 <div className="absolute bottom-4 left-4">
                   <div className="flex gap-2 mb-1">
-                    {project.tags.map((tag) => (
+                    {project.tags.map((tag: string) => (
                       <span key={tag} className="lime-badge text-[0.55rem]">{tag}</span>
                     ))}
                   </div>
