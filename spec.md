@@ -24,8 +24,9 @@ et organisations dans la création de stratégies innovantes et impactantes.
 - Home
 - About Us
 - Our Expertise (Services)
-- Meet the Team
-- Our Clients
+- Clients
+- Team
+- Contact 
 
 ---
 

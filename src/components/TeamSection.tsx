@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Facebook, Twitter, Linkedin, Share2 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import { CategoryBar } from "./CategoryBar";
 import team1 from "@/assets/team-1.jpg";
 import team2 from "@/assets/team-2.jpg";
@@ -18,6 +19,7 @@ const fallbackMembers = [
 ];
 
 export function TeamSection() {
+  const { t } = useTranslation();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [members, setMembers] = useState<any[]>(fallbackMembers);
 
@@ -44,7 +46,7 @@ export function TeamSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          EQUIPE
+          {t('sections.team')}
         </motion.h2>
         <CategoryBar items={teamCategories} />
 

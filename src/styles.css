@@ -180,11 +180,11 @@
   }
 
   .hero-gradient {
-    background: linear-gradient(135deg, oklch(0.20 0.12 280), oklch(0.25 0.15 270), oklch(0.22 0.08 260));
+    background: #000;
   }
 
   .footer-gradient {
-    background: linear-gradient(135deg, oklch(0.20 0.12 280), oklch(0.25 0.15 270), oklch(0.18 0.10 260));
+    background: #000;
   }
 
   .lime-badge {

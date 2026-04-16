@@ -28,7 +28,7 @@ export function FooterSection() {
             <div>
               <Logo className="text-hero-foreground" />
               <p className="mt-4 text-xs text-hero-foreground/60 leading-relaxed tracking-wider uppercase" style={{ fontFamily: 'var(--font-body)' }}>
-                Agence leader en marketing et communication digitale en République Centrafricaine.
+                Agence de conseil en communication et marketing digitale en République Centrafricaine.
               </p>
               <div className="flex gap-3 mt-6">
                 {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
@@ -104,7 +104,7 @@ export function FooterSection() {
         </div>
 
         <div className="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between text-[0.65rem] tracking-widest text-hero-foreground/40 uppercase">
-          <span>COPYRIGHT 2025 ALL RIGHTS RESERVED</span>
+          <span>COPYRIGHT 2026 ALL RIGHTS RESERVED</span>
           <div className="flex gap-6 mt-2 md:mt-0">
             <a href="#" className="hover:text-hero-foreground transition-colors">PRIVACY POLICY</a>
             <span>|</span>

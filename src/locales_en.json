@@ -3,7 +3,9 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
+    "clients": "Clients",
     "projects": "Projects",
+    "pubs": "Publications",
     "blog": "Blog",
     "team": "Team",
     "contact": "Contact"
@@ -11,6 +13,28 @@
   "hero": {
     "title": "MUNA'SPHERE-RCA",
     "tagline": "DARE TO TAKE ACTION",
-    "description": "A leading communication and digital marketing agency in the Central African Republic."
+    "description": "A leading communication and digital marketing agency in the Central African Republic.",
+    "cta": "Discover our services"
+  },
+  "sections": {
+    "services": "Services",
+    "projects": "Projects",
+    "blog": "Blog",
+    "team": "Team",
+    "about": "About"
+  },
+  "footer": {
+    "about": "A leading communication and digital marketing agency in the Central African Republic.",
+    "contact_cta": "Contact us",
+    "copyright": "COPYRIGHT 2025 ALL RIGHTS RESERVED",
+    "policies": "PRIVACY POLICY"
+  },
+  "about": {
+    "badge": "WHO ARE WE?",
+    "title": "Who we are",
+    "description": "Founded in 2013, MUNA'SPHERE-RCA is a leading communication agency in the Central African Republic. We design and implement innovative strategies to support our clients' growth.",
+    "cta": "GET TO",
+    "cta2": "KNOW US",
+    "extra": "An attentive team offering creative expertise and tailored digital strategies to reach your audience."
   }
 }

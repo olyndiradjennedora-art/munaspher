@@ -3,14 +3,38 @@
     "home": "Accueil",
     "about": "A Propos",
     "services": "Services",
+    "clients": "Clients",
     "projects": "Realisations",
+    "pubs": "Pubs",
     "blog": "Publications",
     "team": "Equipe",
     "contact": "Nous contacter"
   },
   "hero": {
     "title": "MUNA'SPHERE-RCA",
-    "tagline": "DARE TO TAKE ACTION",
-    "description": "Agence leader en marketing et communication digitale en République Centrafricaine."
+    "tagline": "OSEZ PASSER À L'ACTION",
+    "description": "Agence leader en marketing et communication digitale en République Centrafricaine.",
+    "cta": "Découvrir nos services"
+  },
+  "sections": {
+    "services": "Services",
+    "projects": "Realisations",
+    "blog": "Publications",
+    "team": "Equipe",
+    "about": "A Propos"
+  },
+  "footer": {
+    "about": "Agence leader en marketing et communication digitale en République Centrafricaine.",
+    "contact_cta": "Nous contacter",
+    "copyright": "COPYRIGHT 2025 ALL RIGHTS RESERVED",
+    "policies": "POLITIQUE DE CONFIDENTIALITÉ"
+  },
+  "about": {
+    "badge": "QUI SOMMES-NOUS ?",
+    "title": "Qui sommes-nous ?",
+    "description": "Depuis sa création en 2013, MUNA'SPHERE-RCA s’est imposée comme un acteur majeur de la communication en République Centrafricaine. Nous concevons et mettons en œuvre des stratégies innovantes pour accompagner la croissance de nos clients.",
+    "cta": "DÉCOUVRIR",
+    "cta2": "NOTRE ÉQUIPE",
+    "extra": "Une équipe attentive offrant un savoir-faire créatif et des stratégies digitales adaptées à votre audience."
   }
 }

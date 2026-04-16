@@ -1,8 +1,11 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import heroBg from "@/assets/hero-bg.jpg";
+import { useTranslation } from 'react-i18next';
 
 export function HeroSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="relative min-h-screen hero-gradient overflow-hidden flex items-end pb-20">
       <img
@@ -17,10 +20,10 @@ export function HeroSection() {
       <div className="relative z-10 max-w-7xl mx-auto w-full px-8">
         <div className="flex items-start gap-4 mb-12">
           <a href="/team" className="lime-badge flex items-center gap-1">
-            EQUIPE <ArrowUpRight className="w-3 h-3" />
+            {t('nav.team')} <ArrowUpRight className="w-3 h-3" />
           </a>
           <a href="/about" className="lime-badge flex items-center gap-1">
-            A PROPOS <ArrowUpRight className="w-3 h-3" />
+            {t('nav.about')} <ArrowUpRight className="w-3 h-3" />
           </a>
         </div>
 
@@ -38,7 +41,7 @@ export function HeroSection() {
                 fontFamily: 'var(--font-body)',
               }}
             >
-              MUNA'SPHERE-RCA
+              {t('hero.title')}
             </h1>
           </motion.div>
 
@@ -48,8 +51,8 @@ export function HeroSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <p className="text-hero-foreground/80">Agence leader en marketing et communication digitale en République Centrafricaine.</p>
-            <a href="/services" className="lime-btn px-6 py-3 mt-4 inline-flex items-center gap-2">Découvrir nos services <ArrowUpRight className="w-4 h-4" /></a>
+            <p className="text-hero-foreground/80">{t('hero.description')}</p>
+            <a href="/services" className="lime-btn px-6 py-3 mt-4 inline-flex items-center gap-2">{t('hero.cta')} <ArrowUpRight className="w-4 h-4" /></a>
 
             <div className="pt-8 flex items-center gap-3">
               <div className="w-6 h-6 flex items-center justify-center">
@@ -58,7 +61,7 @@ export function HeroSection() {
                 </svg>
               </div>
               <span className="text-hero-foreground text-sm font-bold tracking-wider uppercase">
-                Agence leader en marketing et communication digitale
+                {t('hero.tagline')}
               </span>
             </div>
           </motion.div>

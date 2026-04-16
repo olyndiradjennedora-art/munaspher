@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 import { CategoryBar } from "./CategoryBar";
 import serviceBrand from "@/assets/service-brand.jpg";
 import client from "@/lib/sanity";
 
 export function ServicesSection() {
+  const { t } = useTranslation();
   const [hovered, setHovered] = useState<number | null>(null);
   const [services, setServices] = useState<any[]>([]);
 
@@ -31,7 +33,7 @@ export function ServicesSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          SERVICES
+          {t('sections.services')}
         </motion.h2>
         <CategoryBar />
 

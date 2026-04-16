@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 import { CategoryBar } from "./CategoryBar";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
@@ -33,6 +34,7 @@ const fallbackProjects = [
 ];
 
 export function ProjectsSection() {
+  const { t } = useTranslation();
   const [projects, setProjects] = useState<any[]>(fallbackProjects);
 
   useEffect(() => {
@@ -65,7 +67,7 @@ export function ProjectsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            PROJECTS
+            {t('sections.projects')}
           </motion.h2>
           <motion.a
             href="/contact"

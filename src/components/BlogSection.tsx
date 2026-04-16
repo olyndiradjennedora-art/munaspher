@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight, MessageCircle } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 import { CategoryBar } from "./CategoryBar";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
@@ -10,6 +11,7 @@ import client from "@/lib/sanity";
 const blogCategories = ["CREATIVE", "TEAM", "PRODUCTIVE", "TEST WORK", "IMPLEMENTATION"];
 
 export function BlogSection() {
+  const { t } = useTranslation();
   const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export function BlogSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          PUBLICATIONS
+          {t('sections.blog')}
         </motion.h2>
         <CategoryBar items={blogCategories} />
 
