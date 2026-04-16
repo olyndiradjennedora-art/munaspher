@@ -36,12 +36,12 @@ export function Header() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Logo className="text-hero-foreground" />
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-4 flex-nowrap">
           {navItems.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="text-xs font-semibold tracking-widest text-hero-foreground/70 hover:text-hero-foreground transition-colors uppercase"
+              className="text-[0.72rem] font-semibold text-hero-foreground/70 hover:text-hero-foreground transition-colors uppercase whitespace-nowrap"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               {item.label}

@@ -1,17 +1,37 @@
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 import { Logo } from "./Logo";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const footerLinks = [
-  { title: "", items: ["ACCUEIL", "A PROPOS", "SERVICES", "PUBLICATIONS", "NOUS CONTACTER"] },
-  { title: "", items: ["A PROPOS", "FEATURES", "PORTFOLIO", "PRICING", "BLOGS"] },
-  { title: "", items: ["CONTACT", "STYLE GUIDE", "CHANGELOG", "LICENSES"] },
+  { title: "", items: ["home", "about", "services", "blog", "contact"] },
+  { title: "", items: ["about", "services", "projects", "pubs", "blog"] },
+  { title: "", items: ["contact", "privacy", "terms", "team"] },
 ];
 
-const bottomCategories = ["CONTACTEZ-NOUS", "SERVICES", "PORTFOLIO", "IMPLEMENTATION"];
+const bottomCategories = ["contact", "services", "projects", "team"];
+
+function hrefFor(key: string) {
+  switch (key) {
+    case 'home': return '/';
+    case 'about': return '/about';
+    case 'services': return '/services';
+    case 'clients': return '/clients';
+    case 'projects': return '/projects';
+    case 'pubs': return '/pubs';
+    case 'blog': return '/blog';
+    case 'team': return '/team';
+    case 'contact': return '/contact';
+    case 'privacy': return '/privacy';
+    case 'terms': return '/terms';
+    default: return '#';
+  }
+}
 
 export function FooterSection() {
+  const { t } = useTranslation();
+
   return (
     <footer id="contact" className="relative footer-gradient text-hero-foreground overflow-hidden">
       <img
@@ -28,7 +48,7 @@ export function FooterSection() {
             <div>
               <Logo className="text-hero-foreground" />
               <p className="mt-4 text-xs text-hero-foreground/60 leading-relaxed tracking-wider uppercase" style={{ fontFamily: 'var(--font-body)' }}>
-                Agence de conseil en communication et marketing digitale en République Centrafricaine.
+                {t('footer.about')}
               </p>
               <div className="flex gap-3 mt-6">
                 {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
@@ -42,23 +62,17 @@ export function FooterSection() {
             {footerLinks.map((col, i) => (
               <div key={i}>
                 <ul className="space-y-3">
-                  {col.items.map((item) => (
-                    <li key={item}>
-                      <a href={
-                        item === 'HOME' ? '/' :
-                        item === 'PAGES' || item === 'ABOUT US' ? '/about' :
-                        item === 'PORTFOLIO' ? '/projects' :
-                        item === 'SHOP' ? '/services' :
-                        item === 'BLOG' || item === 'BLOGS' ? '/blog' :
-                        item === 'CONTACT' ? '/contact' :
-                        item === 'PRIVACY POLICY' ? '/privacy' :
-                        item === 'TERM OF SERVICE' ? '/terms' :
-                        '#'
-                      } className="text-xs tracking-widest text-hero-foreground/60 hover:text-lime transition-colors uppercase" style={{ fontFamily: 'var(--font-body)' }}>
-                        {item}
-                      </a>
-                    </li>
-                  ))}
+                  {col.items.map((key) => {
+                    const label = key === 'privacy' ? t('footer.policies') : key === 'pubs' ? t('nav.pubs') : t(`nav.${key}`);
+                    const href = hrefFor(key);
+                    return (
+                      <li key={key}>
+                        <a href={href} className="text-xs tracking-widest text-hero-foreground/60 hover:text-lime transition-colors uppercase" style={{ fontFamily: 'var(--font-body)' }}>
+                          {label ? label.toUpperCase() : key.toUpperCase()}
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
@@ -79,7 +93,7 @@ export function FooterSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              NOUS CONTACTER
+              {t('footer.contact_cta').toUpperCase()}
             </motion.h2>
             <motion.a
               href="/contact"
@@ -90,7 +104,7 @@ export function FooterSection() {
               transition={{ duration: 0.5, delay: 0.3 }}
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              PRENDRE CONTACT
+              {t('footer.contact_cta')}
             </motion.a>
           </div>
         </div>
@@ -98,15 +112,15 @@ export function FooterSection() {
         <div className="max-w-7xl mx-auto px-8">
           <div className="category-bar border-hero-foreground/20 text-hero-foreground/50">
             {bottomCategories.map((item) => (
-              <span key={item}>{item}</span>
+              <span key={item}>{t(`nav.${item}`).toUpperCase()}</span>
             ))}
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between text-[0.65rem] tracking-widest text-hero-foreground/40 uppercase">
-          <span>COPYRIGHT 2026 ALL RIGHTS RESERVED</span>
+          <span>{t('footer.copyright')}</span>
           <div className="flex gap-6 mt-2 md:mt-0">
-            <a href="#" className="hover:text-hero-foreground transition-colors">PRIVACY POLICY</a>
+            <a href="/privacy" className="hover:text-hero-foreground transition-colors">{t('footer.policies')}</a>
             <span>|</span>
             <a href="/terms" className="hover:text-hero-foreground transition-colors">TERM OF SERVICE</a>
           </div>
