@@ -101,9 +101,9 @@ function SectorCard({ sector }: { sector: Sector }) {
               key={company}
               className="flex items-center gap-3 p-2 bg-background rounded border border-border/50 hover:border-primary/50 transition-colors"
             >
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center overflow-hidden flex-shrink-0">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 relative overflow-hidden flex-shrink-0">
                 <img src={logoSrc} alt={company} className="object-cover w-full h-full" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
-                <span className="text-sm font-bold text-primary absolute">{CompanyInitial(company)}</span>
+                <span className="absolute inset-0 flex items-center justify-center text-sm sm:text-base font-bold text-primary">{CompanyInitial(company)}</span>
               </div>
 
               <span className="text-sm font-medium text-foreground line-clamp-2">
