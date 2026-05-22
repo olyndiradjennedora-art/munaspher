@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 // Local fallback type for Sanity images to avoid requiring @types/sanity during dev type-checks
 // Use 'unknown' to avoid eslint rule against explicit 'any'
-type SanityImageAsset = { _ref?: string } | unknown;
+type SanityImageAsset = { asset?: { _ref?: string; _type?: string }; alt?: string };
 
 interface CompanyCardProps {
   name: string;
@@ -17,15 +17,15 @@ export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
   const [imageError, setImageError] = useState(false);
 
   // Fonction pour construire l'URL de l'image Sanity
-  const getImageUrl = (asset: { asset?: { _ref: string; _type?: string } }) => {
-    if (!asset?.asset?._ref) return null;
-    const ref = asset.asset._ref;
+  const getImageUrl = (logoObj?: SanityImageAsset | undefined) => {
+    const ref = (logoObj as any)?.asset?._ref;
+    if (!ref) return null;
     const parts = ref.split('-');
     const format = parts[parts.length - 1];
     return `https://cdn.sanity.io/images/project-id/dataset/${ref}.${format}`;
   };
 
-  const imageUrl = logo?.asset ? getImageUrl(logo) : null;
+  const imageUrl = getImageUrl(logo);
 
   return (
     <motion.div
