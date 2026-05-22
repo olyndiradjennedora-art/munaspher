@@ -6,10 +6,7 @@ type SanityImageAsset = { asset?: { _ref?: string; _type?: string }; alt?: strin
 
 interface CompanyCardProps {
   name: string;
-  logo?: {
-    asset?: SanityImageAsset;
-    alt?: string;
-  };
+  logo?: SanityImageAsset;
   index?: number;
 }
 
@@ -18,7 +15,7 @@ export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
 
   // Fonction pour construire l'URL de l'image Sanity
   const getImageUrl = (logoObj?: SanityImageAsset | undefined) => {
-    const ref = (logoObj as any)?.asset?._ref;
+    const ref = logoObj?.asset?._ref;
     if (!ref) return null;
     const parts = ref.split('-');
     const format = parts[parts.length - 1];
