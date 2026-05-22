@@ -27,7 +27,7 @@ export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
 
   return (
     <motion.div
-      className="group relative min-h-[96px] bg-[var(--card)] text-[var(--card-foreground)] rounded-lg border border-[var(--color-border)] shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center justify-center p-4 overflow-hidden"
+      className="group relative min-h-[80px] bg-[var(--card)] text-[var(--card-foreground)] rounded-lg border border-[var(--color-border)] shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center justify-center p-3 overflow-hidden">
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -39,7 +39,7 @@ export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full gap-3">
         {/* Logo Container */}
-        <div className="h-20 flex items-center justify-center mb-1">
+        <div className="h-16 flex items-center justify-center mb-1">
           {imageUrl && !imageError ? (
             <img
               src={imageUrl}
@@ -48,8 +48,8 @@ export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
               onError={() => setImageError(true)}
             />
           ) : (
-            <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-[var(--secondary)] to-[var(--primary)] flex items-center justify-center border border-[var(--color-border)] group-hover:border-[var(--primary)] transition-colors">
-              <span className="text-lg font-bold text-[var(--section-light)]">
+            <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[var(--secondary)] to-[var(--primary)] flex items-center justify-center border border-[var(--color-border)] group-hover:border-[var(--primary)] transition-colors">
+              <span className="text-base font-bold text-[var(--section-light)]">
                 {name.charAt(0).toUpperCase()}
               </span>
             </div>

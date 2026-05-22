@@ -139,7 +139,7 @@ export function ClientSection({ clients }: ClientSectionProps) {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
-          className="mb-16 text-center"
+          className="mb-12 text-center"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -164,7 +164,7 @@ export function ClientSection({ clients }: ClientSectionProps) {
         </motion.div>
 
         {/* Sectors Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-6">
           {sortedSectors.map((sector, idx) => {
             const count = sector.companies?.length ?? 0;
             let spanClass = "md:col-span-6 lg:col-span-6"; // default: two cards per row on md+
