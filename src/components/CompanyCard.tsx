@@ -27,7 +27,7 @@ export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
 
   return (
     <motion.div
-      className="group relative h-40 bg-[var(--card)] text-[var(--card-foreground)] rounded-lg border border-[var(--color-border)] shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center justify-center p-4 overflow-hidden"
+      className="group relative min-h-[96px] bg-[var(--card)] text-[var(--card-foreground)] rounded-lg border border-[var(--color-border)] shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center justify-center p-4 overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

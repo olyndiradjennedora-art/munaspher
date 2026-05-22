@@ -164,14 +164,14 @@ export function ClientSection({ clients }: ClientSectionProps) {
         </motion.div>
 
         {/* Sectors Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8">
           {sortedSectors.map((sector, idx) => {
             const count = sector.companies?.length ?? 0;
-            let spanClass = "md:col-span-6"; // default: two cards per row on md+
-            if (count >= 10) spanClass = "md:col-span-12"; // big sectors full width
-            else if (count === 2) spanClass = "md:col-span-3"; // four cards per row
-            else if (count === 1) spanClass = "md:col-span-4"; // three cards per row
-            else if (count === 3 || count === 4) spanClass = "md:col-span-6"; // two cards per row
+            let spanClass = "md:col-span-6 lg:col-span-6"; // default: two cards per row on md+
+            if (count >= 10) spanClass = "md:col-span-12 lg:col-span-12"; // big sectors full width
+            else if (count === 2) spanClass = "md:col-span-3 lg:col-span-3"; // four cards per row
+            else if (count === 1) spanClass = "md:col-span-4 lg:col-span-4"; // three cards per row
+            else if (count === 3 || count === 4) spanClass = "md:col-span-6 lg:col-span-6"; // two cards per row
 
             return (
               <div key={sector._id} className={`col-span-1 ${spanClass}`}>
@@ -194,10 +194,10 @@ export function ClientSection({ clients }: ClientSectionProps) {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <p className="text-gray-600 text-lg mb-6">
+          <p className="text-[var(--muted-foreground)] text-lg mb-6">
             Vous souhaitez rejoindre nos clients satisfaits ?
           </p>
-          <button className="px-8 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl">
+          <button className="px-8 py-3 bg-[var(--primary)] text-[var(--primary-foreground)] font-semibold rounded-lg hover:opacity-95 transition-all duration-300 shadow-lg hover:shadow-xl">
             Nous Contacter
           </button>
         </motion.div>
