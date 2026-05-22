@@ -56,7 +56,7 @@ export function SectorCard({
       {/* Content Section */}
       <div className="p-6">
         {sortedCompanies.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }}>
             {sortedCompanies.map((company, idx) => (
               <CompanyCard
                 key={company._id}
