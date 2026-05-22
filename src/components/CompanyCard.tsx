@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import type { SanityImageAsset } from "sanity";
+// Local fallback type for Sanity images to avoid requiring @types/sanity during dev type-checks
+type SanityImageAsset = { _ref?: string } | any;
 
 interface CompanyCardProps {
   name: string;
