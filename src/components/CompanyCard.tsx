@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 // Local fallback type for Sanity images to avoid requiring @types/sanity during dev type-checks
-type SanityImageAsset = { _ref?: string } | any;
+// Use 'unknown' to avoid eslint rule against explicit 'any'
+type SanityImageAsset = { _ref?: string } | unknown;
 
 interface CompanyCardProps {
   name: string;

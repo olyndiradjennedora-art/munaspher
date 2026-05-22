@@ -1,6 +1,7 @@
 /* Custom route tree combining generated root with new file routes.
    This is intentionally separate so the generated `routeTree.gen.ts` is not modified by hand.
 */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Route as rootRouteImport } from './__root';
 import { Route as IndexRouteImport } from './index';
