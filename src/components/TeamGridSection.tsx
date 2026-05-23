@@ -52,7 +52,7 @@ export function TeamGridSection() {
   const last = members.slice(8);
 
   return (
-    <section className="py-24 px-8 bg-background">
+    <section id="team" className="py-24 px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="section-heading"

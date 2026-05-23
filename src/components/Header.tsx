@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 import { Logo } from "./Logo";
 import { ArrowUpRight } from "lucide-react";
 import { useTranslation } from 'react-i18next';
@@ -18,17 +18,32 @@ export function Header() {
     }
   }, [lang, i18n]);
 
-  // Use direct route links so navbar navigates to dedicated pages while keeping anchors on homepage
+  // Use direct route links and anchors so navbar navigates to pages, and scrolls to sections when on the homepage
   const navItems = [
-    { label: t('nav.home'), href: '/' },
-    { label: t('nav.about'), href: '/about' },
-    { label: t('nav.services'), href: '/services' },
-    { label: t('nav.clients'), href: '/clients' },
-    { label: t('nav.projects'), href: '/projects' },
-    { label: t('nav.pubs'), href: '/pubs' },
-    { label: t('nav.team'), href: '/team' },
-    { label: t('nav.contact'), href: '/contact' },
+    { label: t('nav.home'), href: '/', anchor: '' },
+    { label: t('nav.about'), href: '/about', anchor: 'about' },
+    { label: t('nav.services'), href: '/services', anchor: 'services' },
+    { label: t('nav.clients'), href: '/clients', anchor: 'clients' },
+    { label: t('nav.projects'), href: '/projects', anchor: 'projects' },
+    { label: t('nav.pubs'), href: '/pubs', anchor: 'pubs' },
+    { label: t('nav.team'), href: '/team', anchor: 'team' },
+    { label: t('nav.contact'), href: '/contact', anchor: 'contact' },
   ];
+
+  // If user is already on the homepage, scroll to the section instead of navigating
+  function handleNavClick(e: MouseEvent<HTMLAnchorElement>, href: string, anchor?: string) {
+    if (typeof window === 'undefined') return;
+    if (anchor && window.location.pathname === '/') {
+      e.preventDefault();
+      const el = document.getElementById(anchor);
+      if (el) {
+        const headerOffset = 80; // adjust if header height differs
+        const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({ top: elementPosition - headerOffset, behavior: 'smooth' });
+      }
+    }
+    // otherwise allow normal navigation to the dedicated page
+  }
 
   function handleLangChange(next: string) {
     setLang(next);
@@ -44,6 +59,7 @@ export function Header() {
             <a
               key={item.label}
               href={item.href}
+              onClick={(e) => handleNavClick(e, item.href, item.anchor)}
               className="text-[0.78rem] font-semibold text-[var(--color-foreground)]/90 hover:text-[var(--color-foreground)] transition-colors uppercase whitespace-nowrap"
               style={{ fontFamily: 'var(--font-body)' }}
             >
@@ -70,7 +86,7 @@ export function Header() {
             </button>
           </div>
 
-          <a href="/contact" className="lime-btn px-4 py-2 text-sm">
+          <a href="/contact" onClick={(e) => handleNavClick(e, '/contact', 'contact')} className="lime-btn px-4 py-2 text-sm">
             <ArrowUpRight className="w-4 h-4" />
             {t('footer.contact_cta')}
           </a>
@@ -83,12 +99,13 @@ export function Header() {
           <a
             key={item.label}
             href={item.href}
-            className="text-xs font-semibold text-[var(--color-foreground)]/80 hover:text-[var(--color-foreground)] px-2 py-1"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
-            {item.label}
-          </a>
-        ))}
+          onClick={(e) => handleNavClick(e, item.href, item.anchor)}
+          className="text-xs font-semibold text-[var(--color-foreground)]/80 hover:text-[var(--color-foreground)] px-2 py-1"
+          style={{ fontFamily: 'var(--font-body)' }}
+        >
+          {item.label}
+        </a>
+      ))}
       </nav>
     </header>
   );

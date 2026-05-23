@@ -56,7 +56,7 @@ export function ServicesGridSection() {
   ];
 
   return (
-    <section className="py-24 px-4 bg-background">
+    <section id="services" className="py-24 px-4 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="section-heading"

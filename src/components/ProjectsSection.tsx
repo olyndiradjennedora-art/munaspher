@@ -71,7 +71,7 @@ export function ProjectsSection() {
   }, []);
 
   return (
-    <section className="py-24 px-8 bg-background">
+    <section id="projects" className="py-24 px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="relative">
           <motion.h2
