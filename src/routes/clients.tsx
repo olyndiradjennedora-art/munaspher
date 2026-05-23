@@ -1,4 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ClientSection } from "@/components/ClientSection";
+
+export const Route = createFileRoute("/clients")({  
+    head: () => ({ meta: [{ title: "Clients — MUNA'SPHERE-RCA" }] }),
+    component: ClientSection,
+});
 
 interface Sector {
   key: string;
@@ -85,10 +91,32 @@ function CompanyInitial(name: string): string {
 }
 
 function SectorCard({ sector }: { sector: Sector }) {
+  const companyCount = sector.companies.length;
+  
+  // Determine grid layout based on number of companies
+  let gridColsClass = 'grid-cols-1';
+  
+  if (companyCount > 10) {
+    // More than 10: 1 card per line
+    gridColsClass = 'grid-cols-1';
+  } else if (companyCount === 2) {
+    // 2 companies: 4 cards per line (for layout purposes, but will show 2)
+    gridColsClass = 'grid-cols-2 md:grid-cols-4';
+  } else if (companyCount === 3 || companyCount === 4) {
+    // 3-4 companies: 2 cards per line
+    gridColsClass = 'grid-cols-1 md:grid-cols-2';
+  } else if (companyCount === 1) {
+    // 1 company: 3 cards per line (but will show 1)
+    gridColsClass = 'grid-cols-1 md:grid-cols-3';
+  }
+
   return (
-    <div className="bg-card border border-border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
-      <h2 className="text-lg font-semibold text-foreground mb-4">{sector.title}</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <div className="bg-gradient-to-br from-card to-card border border-border/60 rounded-lg p-6 shadow-md hover:shadow-lg transition-all hover:border-primary/40">
+      <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+        <span className="h-1 w-8 bg-gradient-to-r from-primary to-secondary rounded-full"></span>
+        {sector.title}
+      </h2>
+      <div className={`grid ${gridColsClass} gap-4`}>
         {sector.companies.map((company) => {
           const slug = company
             .toLowerCase()
@@ -99,14 +127,14 @@ function SectorCard({ sector }: { sector: Sector }) {
           return (
             <div
               key={company}
-              className="flex items-center gap-3 p-2 bg-background rounded border border-border/50 hover:border-primary/50 transition-colors"
+              className="group flex items-center gap-4 p-3 bg-gradient-to-br from-background/40 to-background/20 rounded-lg border border-border/40 hover:border-secondary/60 transition-all hover:bg-background/60 cursor-pointer"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 relative overflow-hidden flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/30 to-secondary/20 relative overflow-hidden flex-shrink-0 flex items-center justify-center group-hover:from-primary/50 group-hover:to-secondary/40 transition-all ring-2 ring-border/50">
                 <img src={logoSrc} alt={company} className="object-cover w-full h-full" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
-                <span className="absolute inset-0 flex items-center justify-center text-sm sm:text-base font-bold text-primary">{CompanyInitial(company)}</span>
+                <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-primary group-hover:text-accent transition-colors">{CompanyInitial(company)}</span>
               </div>
 
-              <span className="text-sm font-medium text-foreground line-clamp-2">
+              <span className="text-sm font-medium text-foreground group-hover:text-secondary transition-colors line-clamp-2">
                 {company}
               </span>
             </div>
@@ -119,16 +147,21 @@ function SectorCard({ sector }: { sector: Sector }) {
 
 function ClientsPage() {
   return (
-    <section className="py-16 px-4 bg-background">
+    <section className="min-h-screen py-20 px-4 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold text-foreground mb-3">Clients</h1>
-          <p className="text-lg text-muted-foreground">
-            Ils nous font confiance — Découvrez les secteurs d'activités avec lesquels nous travaillons
+        <div className="mb-16 relative">
+          <div className="inline-block">
+            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-4 font-display">
+              Nos <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">Clients</span>
+            </h1>
+            <div className="h-1 w-32 bg-gradient-to-r from-primary via-secondary to-primary rounded-full mb-6"></div>
+          </div>
+          <p className="text-lg text-muted-foreground max-w-2xl">
+            Ils nous font confiance — Découvrez les secteurs d'activités avec lesquels nous travaillons et les partenaires qui ont choisi Muna'Sphere
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-8">
           {sectors.map((sector) => (
             <SectorCard key={sector.key} sector={sector} />
           ))}
@@ -137,8 +170,3 @@ function ClientsPage() {
     </section>
   );
 }
-
-export const Route = createFileRoute("/clients")({
-  head: () => ({ meta: [{ title: "Clients — MUNA'SPHERE-RCA" }] }),
-  component: ClientsPage,
-});

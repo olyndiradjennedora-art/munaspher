@@ -11,6 +11,7 @@ import { Route as ProjectsRouteImport } from './projects';
 import { Route as TeamRouteImport } from './team';
 import { Route as BlogRouteImport } from './blog';
 import { Route as ContactRouteImport } from './contact';
+import { Route as ClientsRouteImport } from './clients';
 import { Route as PrivacyRouteImport } from './privacy';
 import { Route as TermsRouteImport } from './terms';
 
@@ -21,16 +22,18 @@ const ProjectsRoute = ProjectsRouteImport.update({ id: '/projects', path: '/proj
 const TeamRoute = TeamRouteImport.update({ id: '/team', path: '/team', getParentRoute: () => rootRouteImport } as any);
 const BlogRoute = BlogRouteImport.update({ id: '/blog', path: '/blog', getParentRoute: () => rootRouteImport } as any);
 const ContactRoute = ContactRouteImport.update({ id: '/contact', path: '/contact', getParentRoute: () => rootRouteImport } as any);
+const ClientsRoute = ClientsRouteImport.update({ id: '/clients', path: '/clients', getParentRoute: () => rootRouteImport } as any);
 const PrivacyRoute = PrivacyRouteImport.update({ id: '/privacy', path: '/privacy', getParentRoute: () => rootRouteImport } as any);
 const TermsRoute = TermsRouteImport.update({ id: '/terms', path: '/terms', getParentRoute: () => rootRouteImport } as any);
 
 const rootRouteChildren = {
   IndexRoute,
   AboutRoute,
+  BlogRoute,
+  ClientsRoute,
   ServicesRoute,
   ProjectsRoute,
   TeamRoute,
-  BlogRoute,
   ContactRoute,
   PrivacyRoute,
   TermsRoute,

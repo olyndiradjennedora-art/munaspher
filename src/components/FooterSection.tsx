@@ -3,11 +3,12 @@ import { motion } from "framer-motion";
 import { useTranslation } from 'react-i18next';
 import { Logo } from "./Logo";
 import heroBg from "@/assets/hero-bg.jpg";
+import about0 from "@/assets/about-0.png"
 
 const footerLinks = [
-  { title: "", items: ["home", "about", "services", "blog", "contact"] },
-  { title: "", items: ["about", "services", "projects", "pubs", "blog"] },
-  { title: "", items: ["contact", "privacy", "terms", "team"] },
+  { title: "", items: ["home", "about", "services", "clients", "team"] },
+  { title: "", items: ["projects", "blog", "contact"] },
+  { title: "", items: ["privacy", "terms"] },
 ];
 
 const bottomCategories = ["contact", "services", "projects", "team"];

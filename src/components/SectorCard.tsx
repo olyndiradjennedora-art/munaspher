@@ -40,7 +40,7 @@ export function SectorCard({
       transition={{ duration: 0.5, delay: index * 0.08 }}
     >
       {/* Header Section */}
-      <div className="bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] px-4 py-4 border-b border-[var(--sidebar-border)]/20">
+      <div className="bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] px-3 py-3 border-b border-[var(--sidebar-border)]/20">
         <h3 className="text-xl font-bold text-[var(--primary-foreground)] mb-2">{title}</h3>
         {description && (
           <p className="text-[var(--secondary-foreground)] text-sm line-clamp-2">{description}</p>
@@ -54,9 +54,9 @@ export function SectorCard({
       </div>
 
       {/* Content Section */}
-      <div className="p-4">
+      <div className="p-3">
         {sortedCompanies.length > 0 ? (
-          <div className="grid gap-3" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))' }}>
+          <div className="grid gap-2" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))' }}>
             {sortedCompanies.map((company, idx) => (
               <CompanyCard
                 key={company._id}

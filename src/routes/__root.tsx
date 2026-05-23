@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 
 import appCss from "../styles.css?url";
 import "../i18n";
+import { Header } from "@/components/Header";
 
 function NotFoundComponent() {
   return (
@@ -68,5 +69,14 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  // Add site-wide header so navbar is present on every page
+  return (
+    <>
+      <Header />
+      {/* Add top padding to avoid content being hidden behind the fixed header */}
+      <div className="pt-20">
+        <Outlet />
+      </div>
+    </>
+  );
 }

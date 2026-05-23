@@ -13,20 +13,35 @@ const teamCategories = ["CREATIVE", "TEAM", "PRODUCTIVE", "TEST WORK", "IMPLEMEN
 
 const fallbackMembers = [
   { name: "NJANJO EDIMO", role: "Directeur Général", image: team1 },
-  { name: "Jackie BAMENGUE", role: "Responsable Commercial", image: team2 },
-  { name: "Cecy Cédric LOUTOMO", role: "Responsable Digital", image: team3 },
-  { name: "Junior MAIMO", role: "Graphiste", image: team4 },
+  { name: "Carine MBOUNGANG", role: "Responsable Financière", image: team2 },
+  { name: "Jackie BAMENGUE", role: "Responsable Commercial", image: team3 },
+  { name: "Cecy Cédric LOUTOMO", role: "Responsable Digital", image: team4 },
+  { name: "Fallone DJEPENO", role: "Chef de PUB", image: team4 },
+  { name: "Brice", role: "Responsable Logistique", image: team3 },
+  { name: "Junior MAIMO", role: "Graphiste Designer", image: team2 },
+  { name: "Ella KOUNHOUA", role: "Infographiste", image: team1 },
+  { name: "Castella GOMBO", role: "Technicienne de Surface", image: team4 },
 ];
+
+type TeamMember = {
+  _id?: string;
+  name: string;
+  role: string;
+  image: string;
+  photoUrl?: string;
+};
+
+type SanityTeamMember = Omit<TeamMember, "image">;
 
 export function TeamSection() {
   const { t } = useTranslation();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const [members, setMembers] = useState<any[]>(fallbackMembers);
+  const [members, setMembers] = useState<TeamMember[]>(fallbackMembers);
 
   useEffect(() => {
     client
-      .fetch('*[_type == "teamMember"]{_id, name, role, "photoUrl": photo.asset->url}')
-      .then((data: any[]) => {
+      .fetch<SanityTeamMember[]>('*[_type == "teamMember"]{_id, name, role, "photoUrl": photo.asset->url}')
+      .then((data) => {
         if (data && data.length) {
           setMembers(
             data.map((m) => ({ name: m.name, role: m.role, image: m.photoUrl || team1 })),

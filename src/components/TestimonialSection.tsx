@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Star, Play } from "lucide-react";
 import testimonialImg from "@/assets/testimonial.jpg";
+import about0 from "@/assets/about-0.png"
 
 const testimonials = [
   {

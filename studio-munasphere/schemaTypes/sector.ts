@@ -1,13 +1,13 @@
 import {defineType} from 'sanity'
 
 export default defineType({
-  name: 'client',
-  title: 'Compagnie/Client',
+  name: 'sector',
+  title: 'Secteur d\'Activité',
   type: 'document',
   fields: [
     {
       name: 'name',
-      title: 'Nom de la Compagnie',
+      title: 'Nom du Secteur',
       type: 'string',
       validation: (Rule) => Rule.required(),
     },
@@ -18,35 +18,25 @@ export default defineType({
       options: {
         source: 'name',
       },
-    },
-    {
-      name: 'logo',
-      title: 'Logo',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
       validation: (Rule) => Rule.required(),
     },
     {
-      name: 'sector',
-      title: 'Secteur d\'Activité',
-      type: 'reference',
-      to: [{type: 'sector'}],
-      validation: (Rule) => Rule.required(),
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      description: 'Courte description du secteur (optionnel)',
     },
     {
       name: 'order',
       title: 'Ordre d\'affichage',
       type: 'number',
-      description: 'Numéro pour trier les compagnies dans le secteur',
+      description: 'Numéro pour trier les secteurs',
     },
   ],
   preview: {
     select: {
       title: 'name',
-      media: 'logo',
-      subtitle: 'sector.name',
+      subtitle: 'description',
     },
   },
 })

@@ -33,14 +33,28 @@ const fallbackProjects = [
   },
 ];
 
+type Project = {
+  _id?: string;
+  title: string;
+  client?: string;
+  description?: string;
+  mainImageUrl?: string;
+  image: string;
+  tags: string[];
+  width: number;
+  height: number;
+};
+
+type SanityProject = Omit<Project, "image" | "width" | "height">;
+
 export function ProjectsSection() {
   const { t } = useTranslation();
-  const [projects, setProjects] = useState<any[]>(fallbackProjects);
+  const [projects, setProjects] = useState<Project[]>(fallbackProjects);
 
   useEffect(() => {
     client
-      .fetch('*[_type == "project"] | order(publishedAt desc){_id, title, client, description, "mainImageUrl": mainImage.asset->url}')
-      .then((data: any[]) => {
+      .fetch<SanityProject[]>('*[_type == "project"] | order(publishedAt desc){_id, title, client, description, "mainImageUrl": mainImage.asset->url}')
+      .then((data) => {
         if (data && data.length) {
           setProjects(
             data.map((p) => ({

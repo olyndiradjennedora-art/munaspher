@@ -12,12 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TeamRouteImport } from './routes/team'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as PubsRouteImport } from './routes/pubs'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ClientsRouteImport } from './routes/clients'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesSlugRouteImport } from './routes/services/$slug'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -32,6 +35,11 @@ const TeamRoute = TeamRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PubsRoute = PubsRouteImport.update({
+  id: '/pubs',
+  path: '/pubs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -49,6 +57,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClientsRoute = ClientsRouteImport.update({
+  id: '/clients',
+  path: '/clients',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -64,40 +77,54 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ServicesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
+  '/clients': typeof ClientsRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
-  '/services': typeof ServicesRoute
+  '/pubs': typeof PubsRoute
+  '/services': typeof ServicesRouteWithChildren
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
+  '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
+  '/clients': typeof ClientsRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
-  '/services': typeof ServicesRoute
+  '/pubs': typeof PubsRoute
+  '/services': typeof ServicesRouteWithChildren
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
+  '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
+  '/clients': typeof ClientsRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
-  '/services': typeof ServicesRoute
+  '/pubs': typeof PubsRoute
+  '/services': typeof ServicesRouteWithChildren
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
+  '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,44 +132,55 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/blog'
+    | '/clients'
     | '/contact'
     | '/privacy'
     | '/projects'
+    | '/pubs'
     | '/services'
     | '/team'
     | '/terms'
+    | '/services/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/blog'
+    | '/clients'
     | '/contact'
     | '/privacy'
     | '/projects'
+    | '/pubs'
     | '/services'
     | '/team'
     | '/terms'
+    | '/services/$slug'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/blog'
+    | '/clients'
     | '/contact'
     | '/privacy'
     | '/projects'
+    | '/pubs'
     | '/services'
     | '/team'
     | '/terms'
+    | '/services/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   BlogRoute: typeof BlogRoute
+  ClientsRoute: typeof ClientsRoute
   ContactRoute: typeof ContactRoute
   PrivacyRoute: typeof PrivacyRoute
   ProjectsRoute: typeof ProjectsRoute
-  ServicesRoute: typeof ServicesRoute
+  PubsRoute: typeof PubsRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
   TeamRoute: typeof TeamRoute
   TermsRoute: typeof TermsRoute
 }
@@ -170,6 +208,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pubs': {
+      id: '/pubs'
+      path: '/pubs'
+      fullPath: '/pubs'
+      preLoaderRoute: typeof PubsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects': {
       id: '/projects'
       path: '/projects'
@@ -189,6 +234,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clients': {
+      id: '/clients'
+      path: '/clients'
+      fullPath: '/clients'
+      preLoaderRoute: typeof ClientsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -212,17 +264,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof ServicesRoute
+    }
   }
 }
+
+interface ServicesRouteChildren {
+  ServicesSlugRoute: typeof ServicesSlugRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesSlugRoute: ServicesSlugRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   BlogRoute: BlogRoute,
+  ClientsRoute: ClientsRoute,
   ContactRoute: ContactRoute,
   PrivacyRoute: PrivacyRoute,
   ProjectsRoute: ProjectsRoute,
-  ServicesRoute: ServicesRoute,
+  PubsRoute: PubsRoute,
+  ServicesRoute: ServicesRouteWithChildren,
   TeamRoute: TeamRoute,
   TermsRoute: TermsRoute,
 }

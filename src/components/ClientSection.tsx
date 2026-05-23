@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { SectorCard } from "./SectorCard";
 
 // Types pour les données Sanity
@@ -114,6 +116,7 @@ const defaultSectors = [
 
 export function ClientSection({ clients }: ClientSectionProps) {
   // Organiser les clients par secteur si les données Sanity sont fournies
+  const { t } = useTranslation();
   const sectors = clients
     ? organizeBySector(clients)
     : defaultSectors.map((sector) => ({
@@ -135,55 +138,89 @@ export function ClientSection({ clients }: ClientSectionProps) {
   });
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-white to-gray-50">
+    <section id="clients" className="py-24 px-4 bg-background text-[var(--color-foreground)]">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <motion.div
-          className="mb-12 text-center"
+        <motion.h2
+          className="section-heading"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-block mb-4">
-            <span className="text-sm font-bold text-[var(--primary)] uppercase tracking-widest">
-              Nos Partenaires
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-[var(--color-foreground)] mb-4">
-            Nos Clients
-          </h2>
-          <p className="text-lg text-[var(--muted-foreground)] max-w-2xl mx-auto">
+          {t('sections.clients')}
+        </motion.h2>
+          <div className="h-1 w-8  rounded-full mt-1" />
+          <p className="text-lg max-w-2xl mx-auto">
             Ils nous ont fait confiance — Découvrez les différents secteurs
             d'activités avec lesquels nous travaillons
           </p>
+          
           <div className="mt-6 flex justify-center gap-3">
             <div className="h-1 w-12 bg-[var(--primary)] rounded-full" />
             <div className="h-1 w-8 bg-[var(--secondary)] rounded-full" />
+            <br />
           </div>
-        </motion.div>
 
-        {/* Sectors Grid */}
+        {/* Sectors Grid - explicit layout rows for better presentation */}
         <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-6">
-          {sortedSectors.map((sector, idx) => {
-            const count = sector.companies?.length ?? 0;
-            let spanClass = "md:col-span-6 lg:col-span-6"; // default: two cards per row on md+
-            if (count >= 10) spanClass = "md:col-span-12 lg:col-span-12"; // big sectors full width
-            else if (count === 2) spanClass = "md:col-span-3 lg:col-span-3"; // four cards per row
-            else if (count === 1) spanClass = "md:col-span-4 lg:col-span-4"; // three cards per row
-            else if (count === 3 || count === 4) spanClass = "md:col-span-6 lg:col-span-6"; // two cards per row
+          {/* Build a lookup for quick access */}
+          {(() => {
+            const sectorById = new Map(sortedSectors.map((s) => [s._id, s]));
 
-            return (
-              <div key={sector._id} className={`col-span-1 ${spanClass}`}>
-                <SectorCard
-                  title={sector.name}
-                  description={sector.description}
-                  companies={sector.companies}
-                  index={idx}
-                />
-              </div>
-            );
-          })}
+            // Desired layout by rows (explicit order)
+            const layout: Array<{ ids: string[]; spanClass: string }> = [
+              // Row 1: Humanitarian - full width
+              { ids: ["humanitarian"], spanClass: "md:col-span-12 lg:col-span-12" },
+              // Row 2: Banking + Mobile - two columns
+              { ids: ["bancaire", "telephonie_mobile"], spanClass: "md:col-span-6 lg:col-span-6" },
+              // Row 3: Three single-company cards - three columns
+              { ids: ["automobile_distribution", "compagnie_aerienne", "bois"], spanClass: "md:col-span-4 lg:col-span-4" },
+              // Row 4: Four cards with two companies each - four columns
+              { ids: ["assurance", "distribution", "petrolier", "agro_alimentaire_brassicole"], spanClass: "md:col-span-3 lg:col-span-3" },
+            ];
+
+            const nodes: JSX.Element[] = [];
+            let index = 0;
+
+            // Render sectors in the explicit layout order if they exist
+            for (const row of layout) {
+              for (const id of row.ids) {
+                const sector = sectorById.get(id);
+                if (sector) {
+                  nodes.push(
+                    <div key={sector._id} className={`col-span-1 ${row.spanClass}`}>
+                      <SectorCard
+                        title={sector.name}
+                        description={sector.description}
+                        companies={sector.companies}
+                        index={index}
+                      />
+                    </div>
+                  );
+                  index += 1;
+                  sectorById.delete(id);
+                }
+              }
+            }
+
+            // Render any remaining sectors (fall back to two-columns)
+            for (const sector of sectorById.values()) {
+              nodes.push(
+                <div key={sector._id} className={`col-span-1 md:col-span-6 lg:col-span-6`}>
+                  <SectorCard
+                    title={sector.name}
+                    description={sector.description}
+                    companies={sector.companies}
+                    index={index}
+                  />
+                </div>
+              );
+              index += 1;
+            }
+
+            return nodes;
+          })()}
         </div>
 
         {/* Bottom CTA */}

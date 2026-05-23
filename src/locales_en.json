@@ -3,38 +3,39 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
-    "clients": "Clients",
-    "projects": "Projects",
-    "pubs": "Publications",
-    "blog": "Blog",
+    "clients": "Our Clients",
+    "projects": "Portfolio",
+    "pubs": "Ads",
+    "blog": "Publications",
     "team": "Team",
     "contact": "Contact"
   },
   "hero": {
-    "title": "MUNA'SPHERE-RCA",
+    "title": "MUNA'SPHERE",
     "tagline": "DARE TO TAKE ACTION",
-    "description": "A leading communication and digital marketing agency in the Central African Republic.",
+    "description": "Communication & Digital Marketing Consulting Agency in the Central African Republic.",
     "cta": "Discover our services"
   },
   "sections": {
     "services": "Services",
-    "projects": "Projects",
-    "blog": "Blog",
+    "clients": "Our Clients",
+    "projects": "Portfolio",
+    "blog": "Publications",
     "team": "Team",
     "about": "About"
   },
   "footer": {
-    "about": "A leading communication and digital marketing agency in the Central African Republic.",
+    "about": "Communication & Digital Marketing Consulting Agency in the Central African Republic.",
     "contact_cta": "Contact us",
-    "copyright": "COPYRIGHT 2025 ALL RIGHTS RESERVED",
-    "policies": "PRIVACY POLICY"
+    "copyright": "COPYRIGHT 2026 ALL RIGHTS RESERVED",
+    "policies": "Privacy Policy"
   },
   "about": {
     "badge": "WHO ARE WE?",
     "title": "Who we are",
-    "description": "Founded in 2013, MUNA'SPHERE-RCA is a leading communication agency in the Central African Republic. We design and implement innovative strategies to support our clients' growth.",
-    "cta": "GET TO",
-    "cta2": "KNOW US",
-    "extra": "An attentive team offering creative expertise and tailored digital strategies to reach your audience."
+    "description": "Since its creation in 2013, MUNA'SPHERE-RCA has established itself as a key player in communication in the Central African Republic. We design and implement innovative strategies to support our clients' growth in the market.",
+    "cta": "DISCOVER",
+    "cta2": "OUR TEAM",
+    "extra": "With an enthusiastic, multicultural, professional, creative and dynamic team, the agency offers a range of services that meet all our clients' needs."
   }
 }

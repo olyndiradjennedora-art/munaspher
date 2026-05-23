@@ -3,11 +3,11 @@
 ## 🧭 Project Overview
 
 **Brand Name:** MUNA'SPHERE-RCA  
-**Also Known As:** MUNA SPHERE-RCA / MUNAS'PHERE  
+**Also Known As:** MUNA SPHERE-RCA / MUNA'SPHERE  
 **Tagline:** DARE TO TAKE ACTION  
 
 **Description:**
-MUNA'SPHERE-RCA est une agence leader en marketing et communication digitale
+MUNA'SPHERE-RCA est une agence de conceil en communication & marketing digitale
 basée en République Centrafricaine. Fondée en 2013, elle accompagne les entreprises
 et organisations dans la création de stratégies innovantes et impactantes.
 
@@ -37,7 +37,7 @@ home:
   title: "MUNA'SPHERE-RCA"
   tagline: "DARE TO TAKE ACTION"
   hero_description: >
-    Agence leader en marketing et communication digitale en République Centrafricaine.
+    Agence de Conseil en Communication & Marketing Digitale en République Centrafricaine.
   vision: >
     Être un acteur incontournable de la communication en Afrique centrale en offrant
     des solutions créatives, innovantes et adaptées aux réalités locales.
@@ -49,7 +49,7 @@ home:
 about:
   founded: 2013
   location: "République Centrafricaine (RCA)"
-  position: "Agence leader en marketing et communication digitale"
+  position: "Agence de Conseil en Communication & Marketing Digitale"
   description: >
     Depuis sa création en 2013, MUNA'SPHERE-RCA s’est imposée comme un acteur majeur
     de la communication en RCA. L’agence conçoit et met en œuvre des stratégies

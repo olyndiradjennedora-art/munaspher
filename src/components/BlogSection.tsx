@@ -10,14 +10,29 @@ import client from "@/lib/sanity";
 
 const blogCategories = ["CREATIVE", "TEAM", "PRODUCTIVE", "TEST WORK", "IMPLEMENTATION"];
 
+type BlogPost = {
+  _id?: string;
+  title?: string;
+  slug?: { current?: string };
+  publishedAt?: string;
+  excerpt?: string;
+  mainImageUrl?: string;
+  image?: string;
+  day?: string;
+  month?: string;
+  category?: string;
+  comments?: number;
+  author?: string;
+};
+
 export function BlogSection() {
   const { t } = useTranslation();
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
     client
-      .fetch('*[_type == "post"] | order(publishedAt desc){_id, title, slug, publishedAt, excerpt, "mainImageUrl": mainImage.asset->url}')
-      .then((data: any[]) => setPosts(data || []))
+      .fetch<BlogPost[]>('*[_type == "post"] | order(publishedAt desc){_id, title, slug, publishedAt, excerpt, "mainImageUrl": mainImage.asset->url}')
+      .then((data) => setPosts(data || []))
       .catch(() => setPosts([]));
   }, []);
 
@@ -44,7 +59,7 @@ export function BlogSection() {
         <CategoryBar items={blogCategories} />
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {list.map((post: any, i: number) => (
+          {list.map((post, i) => (
             <motion.div
               key={post._id || i}
               className="group cursor-pointer"

@@ -5,15 +5,25 @@ import { CategoryBar } from "./CategoryBar";
 import serviceBrand from "@/assets/service-brand.jpg";
 import client from "@/lib/sanity";
 
+type Service = {
+  _id?: string;
+  title: string;
+  slug?: string | { current?: string };
+  category?: string;
+  description?: string;
+  icon?: string;
+  bold?: boolean;
+};
+
 export function ServicesSection() {
   const { t } = useTranslation();
   const [hovered, setHovered] = useState<number | null>(null);
-  const [services, setServices] = useState<any[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
 
   useEffect(() => {
     client
-      .fetch('*[_type == "service"]{_id, title, slug, category, description, icon}')
-      .then((data: any[]) => setServices(data || []))
+      .fetch<Service[]>('*[_type == "service"]{_id, title, slug, category, description, icon}')
+      .then((data) => setServices(data || []))
       .catch(() => setServices([]));
   }, []);
 

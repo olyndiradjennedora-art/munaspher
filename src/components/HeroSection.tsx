@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
-import heroBg from "@/assets/hero-bg.jpg";
+import about0 from "@/assets/about-0.png"
 import { useTranslation } from 'react-i18next';
 
 export function HeroSection() {
@@ -9,22 +9,18 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen hero-gradient overflow-hidden flex items-end pb-20">
       <img
-        src={heroBg}
+        src={about0}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-60"
+        className="absolute inset-0 w-full h-full  opacity-60"
+        style={{ mixBlendMode: 'multiply' }}
         width={1920}
         height={1080}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-hero-bg/80 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t  to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full px-8">
         <div className="flex items-start gap-4 mb-12">
-          <a href="/team" className="lime-badge flex items-center gap-1">
-            {t('nav.team')} <ArrowUpRight className="w-3 h-3" />
-          </a>
-          <a href="/about" className="lime-badge flex items-center gap-1">
-            {t('nav.about')} <ArrowUpRight className="w-3 h-3" />
-          </a>
+        
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-end">
@@ -41,7 +37,6 @@ export function HeroSection() {
                 fontFamily: 'var(--font-body)',
               }}
             >
-              {t('hero.title')}
             </h1>
           </motion.div>
 
