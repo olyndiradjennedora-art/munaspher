@@ -8,15 +8,20 @@ export function Header() {
   const [lang, setLang] = useState<string>(() => (typeof window !== 'undefined' ? localStorage.getItem('lang') || i18n.language || 'fr' : 'fr'));
 
   useEffect(() => {
-    if (lang && i18n.language !== lang) {
+    if (!lang) return;
+
+    // Only react to changes in `lang` (i18n object may be unstable across renders).
+    if (i18n.language !== lang) {
       i18n.changeLanguage(lang).catch(() => {});
     }
+
     try {
       localStorage.setItem('lang', lang);
     } catch {
       // Ignore storage failures in restricted browser contexts.
     }
-  }, [lang, i18n]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
 
   // Use direct route links and anchors so navbar navigates to pages, and scrolls to sections when on the homepage
   const navItems = [
