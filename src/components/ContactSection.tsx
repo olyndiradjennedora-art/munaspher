@@ -1,50 +1,76 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "sonner";
+import client from "@/lib/sanity";
 
-const defaultSectors = [
-  { id: "humanitarian", title: "Secteur Humanitaire", companies: ["PNUD","MINUSCA","USAID (FROM THE AMERICAN PEOPLE)","World Vision","FAO"] },
-  { id: "assurance", title: "Secteur Assurance", companies: ["ASCOMA Centrafrique","SUNU Assurances"] },
-  { id: "automobile_distribution", title: "Secteur Distribution Automobile", companies: ["CFAO"] },
-  { id: "bois", title: "Secteur Bois", companies: ["CENTRABOIS (La Centrafricaine des bois)"] },
-  { id: "distribution", title: "Secteur Distribution", companies: ["QUIFEUROU","SF"] },
-  { id: "compagnie_aerienne", title: "Secteur Compagnie Aérienne", companies: ["Royal Air Maroc"] },
-  { id: "bancaire", title: "Secteur Bancaire", companies: ["Ecobank","Banque Populaire Maroco-Centrafricaine","BGFI Bank"] },
-  { id: "telephonie_mobile", title: "Secteur Téléphonie Mobile", companies: ["Moov Africa Centrafrique","Orange","Moov (No Limit)","Telecel"] },
-  { id: "petrolier", title: "Secteur Pétrolier", companies: ["Tradex","TotalEnergies"] },
-  { id: "agro_alimentaire_brassicole", title: "Secteur Agro-alimentaire & Brassicole", companies: ["Nestlé","SUCAF Centrafrique"] },
-];
+type Sector = { _id: string; name: string };
 
-const serviceTypes = [
-  "Stratégie de communication",
-  "Identité visuelle / Branding",
-  "Digital / Site web",
-  "Production audiovisuelle",
-  "Relations presse / RP",
-  "Conseil & formation",
-  "Autre",
-];
+type ClientEntry = { _id: string; name: string; sectorId?: string };
+
+const placeholderSectors: Array<{ id: string; title: string; companies: string[] }> = [];
+
+const placeholderServices: string[] = [];
 
 export function ContactSection() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
-  const [sector, setSector] = useState<string>(defaultSectors[0].id);
-  const [company, setCompany] = useState<string>(defaultSectors[0].companies[0]);
-  const [service, setService] = useState<string>(serviceTypes[0]);
+  const [sector, setSector] = useState<string>("");
+  const [company, setCompany] = useState<string>("");
+  const [service, setService] = useState<string>("");
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const sectorObj = defaultSectors.find((s) => s.id === sector) ?? defaultSectors[0];
+  const [sectors, setSectors] = useState<Array<{ id: string; title: string; companies: string[] }>>(placeholderSectors);
+  const [services, setServices] = useState<string[]>(placeholderServices);
+  const [loading, setLoading] = useState(true);
+
+  const sectorObj = sectors.find((s) => s.id === sector) ?? sectors[0] ?? { id: "", title: "", companies: [] };
 
   function resetForm() {
     setFirstName("");
     setLastName("");
     setPhone("");
-    setSector(defaultSectors[0].id);
-    setCompany(defaultSectors[0].companies[0]);
-    setService(serviceTypes[0]);
+    setSector(sectors[0]?.id ?? "");
+    setCompany(sectors[0]?.companies?.[0] ?? "");
+    setService(services[0] ?? "");
     setMessage("");
   }
+
+  useEffect(() => {
+    let mounted = true;
+    async function fetchData() {
+      try {
+        // Fetch sectors
+        const sectorResults: Sector[] = await client.fetch('*[_type=="sector"] | order(order asc) { _id, name }');
+        // Fetch clients
+        const clientResults: ClientEntry[] = await client.fetch('*[_type=="client"] | order(order asc) { _id, name, "sectorId": sector._ref }');
+        // Fetch services
+        const serviceResults: Array<{ title: string }> = await client.fetch('*[_type=="service"]{title}');
+
+        const sectorsMapped = sectorResults.map((s) => ({ id: s._id, title: s.name, companies: clientResults.filter((c) => c.sectorId === s._id).map((c) => c.name) }));
+        const servicesMapped = serviceResults.map((s) => s.title);
+
+        if (!mounted) return;
+        setSectors(sectorsMapped);
+        setServices(servicesMapped.length ? servicesMapped : ["Autre"]);
+
+        // set defaults
+        setSector(sectorsMapped[0]?.id ?? "");
+        setCompany(sectorsMapped[0]?.companies?.[0] ?? "");
+        setService((servicesMapped[0]) ?? "");
+      } catch (err) {
+        console.error("Error fetching Sanity data", err);
+        toast.error("Erreur en récupérant les données du formulaire. Utilisez les valeurs par défaut.");
+        // fallback to empty
+        setSectors([{ id: 'other', title: 'Autre', companies: [] }]);
+        setServices(["Autre"]);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
+    fetchData();
+    return () => { mounted = false; };
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -95,8 +121,8 @@ export function ContactSection() {
 
           <div>
             <label className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Secteur d'activité</label>
-            <select value={sector} onChange={(e) => { setSector(e.target.value); const s = defaultSectors.find((x) => x.id === e.target.value); setCompany(s?.companies[0] ?? ""); }} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-background">
-              {defaultSectors.map((s) => (
+            <select value={sector} onChange={(e) => { const val = e.target.value; setSector(val); const s = sectors.find((x) => x.id === val); setCompany(s?.companies?.[0] ?? ""); }} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-background" disabled={loading}>
+              {sectors.map((s) => (
                 <option key={s.id} value={s.id}>{s.title}</option>
               ))}
             </select>
@@ -113,8 +139,8 @@ export function ContactSection() {
 
           <div className="md:col-span-2">
             <label className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Type de service souhaité</label>
-            <select value={service} onChange={(e) => setService(e.target.value)} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-background">
-              {serviceTypes.map((s) => (
+            <select value={service} onChange={(e) => setService(e.target.value)} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-background" disabled={loading}>
+              {services.map((s) => (
                 <option key={s} value={s}>{s}</option>
               ))}
             </select>
