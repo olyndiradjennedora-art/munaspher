@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { SectorCard } from "./SectorCard";
 
@@ -180,7 +181,7 @@ export function ClientSection({ clients }: ClientSectionProps) {
               { ids: ["assurance", "distribution", "petrolier", "agro_alimentaire_brassicole"], spanClass: "md:col-span-3 lg:col-span-3" },
             ];
 
-            const nodes: JSX.Element[] = [];
+            const nodes: ReactElement[] = [];
             let index = 0;
 
             // Render sectors in the explicit layout order if they exist
