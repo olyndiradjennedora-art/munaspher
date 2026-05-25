@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { /* motion */ } from "framer-motion";
 import { CompanyCard } from "./CompanyCard";
 
 interface Company {
@@ -32,13 +32,7 @@ export function SectorCard({
   });
 
   return (
-    <motion.div
-      className="bg-[var(--color-card)] text-[var(--card-foreground)] rounded-xl border border-[var(--color-border)] shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-    >
+    <div className="bg-[var(--color-card)] text-[var(--card-foreground)] rounded-xl border border-[var(--color-border)] shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       {/* Header Section */}
       <div className="bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] px-3 py-3 border-b border-[var(--sidebar-border)]/20">
         <h3 className="text-xl font-bold text-[var(--primary-foreground)] mb-2">{title}</h3>
@@ -74,6 +68,6 @@ export function SectorCard({
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { /* motion */ } from "framer-motion";
 import { useState, useEffect } from "react";
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
@@ -142,15 +142,7 @@ export function ClientSection({ clients }: ClientSectionProps) {
     <section id="clients" className="py-24 px-4 bg-[var(--hero-bg)] text-[var(--color-foreground)]">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <motion.h2
-          className="section-heading"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          {t('sections.clients')}
-        </motion.h2>
+        <h2 className="section-heading">{t('sections.clients')}</h2>
           <div className="h-1 w-8  rounded-full mt-1" />
           <p className="text-lg max-w-2xl mx-auto">
             Ils nous ont fait confiance — Découvrez les différents secteurs
@@ -225,20 +217,14 @@ export function ClientSection({ clients }: ClientSectionProps) {
         </div>
 
         {/* Bottom CTA */}
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
+<div className="mt-16 text-center">
           <p className="text-[var(--muted-foreground)] text-lg mb-6">
             Vous souhaitez rejoindre nos clients satisfaits ?
           </p>
           <button className="px-8 py-3 bg-[var(--primary)] text-[var(--primary-foreground)] font-semibold rounded-lg hover:opacity-95 transition-all duration-300 shadow-lg hover:shadow-xl">
             Nous Contacter
           </button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
