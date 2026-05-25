@@ -12,17 +12,17 @@ export function AboutSection() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         {/* Clover image grid */}
         <div className="grid grid-cols-2 gap-1 max-w-md">
-          <div className="rounded-tl-[50%] overflow-hidden aspect-square">
-            <img src={about1} alt="Team meeting" className="w-full h-full object-cover" loading="lazy" width={800} height={800} />
+          <div className="rounded-tl-[50%] overflow-hidden aspect-square p-1 bg-[var(--hero-bg)]">
+            <img src={about1} alt="Team meeting" className="w-full h-full object-cover shadow-lg" loading="lazy" width={800} height={800} />
           </div>
-          <div className="rounded-tr-[50%] overflow-hidden aspect-square">
-            <img src={about2} alt="Team brainstorming" className="w-full h-full object-cover" loading="lazy" width={800} height={800} />
+          <div className="rounded-tr-[50%] overflow-hidden aspect-square p-1 bg-[var(--hero-bg)]">
+            <img src={about2} alt="Team brainstorming" className="w-full h-full object-cover shadow-lg" loading="lazy" width={800} height={800} />
           </div>
-          <div className="rounded-bl-[50%] overflow-hidden aspect-square">
-            <img src={about2} alt="Team work" className="w-full h-full object-cover" loading="lazy" width={800} height={800} />
+          <div className="rounded-bl-[50%] overflow-hidden aspect-square p-1 bg-[var(--hero-bg)]">
+            <img src={about2} alt="Team work" className="w-full h-full object-cover shadow-lg" loading="lazy" width={800} height={800} />
           </div>
-          <div className="rounded-br-[50%] overflow-hidden aspect-square">
-            <img src={about1} alt="Office scene" className="w-full h-full object-cover" loading="lazy" width={800} height={800} />
+          <div className="rounded-br-[50%] overflow-hidden aspect-square p-1 bg-[var(--hero-bg)]">
+            <img src={about1} alt="Office scene" className="w-full h-full object-cover shadow-lg" loading="lazy" width={800} height={800} />
           </div>
         </div>
 

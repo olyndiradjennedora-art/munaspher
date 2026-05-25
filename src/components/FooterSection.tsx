@@ -38,7 +38,7 @@ export function FooterSection() {
       <img
         src={heroBg}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-30"
+        className="absolute inset-0 w-full h-full object-cover mix-blend-normal opacity-70"
         loading="lazy"
         width={1920}
         height={1080}

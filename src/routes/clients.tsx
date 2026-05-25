@@ -127,7 +127,7 @@ function SectorCard({ sector }: { sector: Sector }) {
           return (
             <div
               key={company}
-              className="group flex items-center gap-4 p-3 bg-gradient-to-br from-background/40 to-background/20 rounded-lg border border-border/40 hover:border-secondary/60 transition-all hover:bg-background/60 cursor-pointer"
+              className="group flex items-center gap-4 p-3 bg-gradient-to-br from-background/80 to-background/60 rounded-lg border border-border/40 hover:border-secondary/60 transition-all hover:bg-background/80 cursor-pointer"
             >
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/30 to-secondary/20 relative overflow-hidden flex-shrink-0 flex items-center justify-center group-hover:from-primary/50 group-hover:to-secondary/40 transition-all ring-2 ring-border/50">
                 <img src={logoSrc} alt={company} className="object-cover w-full h-full" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />

@@ -138,7 +138,7 @@ export function ClientSection({ clients }: ClientSectionProps) {
   });
 
   return (
-    <section id="clients" className="py-24 px-4 bg-background text-[var(--color-foreground)]">
+    <section id="clients" className="py-24 px-4 bg-[var(--hero-bg)] text-[var(--color-foreground)]">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.h2
