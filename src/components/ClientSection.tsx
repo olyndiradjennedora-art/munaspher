@@ -1,6 +1,17 @@
-import { /* motion */ } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useState, useEffect } from "react";
 import type { ReactElement } from "react";
+
+const headingVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const revealVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: (i = 0) => ({ opacity: 1, transition: { duration: 0.6, delay: i * 0.08 } }),
+};
+
 import { useTranslation } from "react-i18next";
 import { SectorCard } from "./SectorCard";
 
@@ -142,18 +153,20 @@ export function ClientSection({ clients }: ClientSectionProps) {
     <section id="clients" className="py-24 px-4 bg-[var(--hero-bg)] text-[var(--color-foreground)]">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <h2 className="section-heading">{t('sections.clients')}</h2>
-          <div className="h-1 w-8  rounded-full mt-1" />
-          <p className="text-lg max-w-2xl mx-auto">
-            Ils nous ont fait confiance — Découvrez les différents secteurs
-            d'activités avec lesquels nous travaillons
-          </p>
-          
-          <div className="mt-6 flex justify-center gap-3">
-            <div className="h-1 w-12 bg-[var(--primary)] rounded-full" />
-            <div className="h-1 w-8 bg-[var(--secondary)] rounded-full" />
-            <br />
-          </div>
+        <motion.h2 className="section-heading" variants={headingVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          {t('sections.clients')}
+        </motion.h2>
+        <div className="h-1 w-8  rounded-full mt-1" />
+        <p className="text-lg max-w-2xl mx-auto">
+          Ils nous ont fait confiance — Découvrez les différents secteurs
+          d'activités avec lesquels nous travaillons
+        </p>
+
+        <div className="mt-6 flex justify-center gap-3">
+          <div className="h-1 w-12 bg-[var(--primary)] rounded-full" />
+          <div className="h-1 w-8 bg-[var(--secondary)] rounded-full" />
+          <br />
+        </div>
 
         {/* Sectors Grid - explicit layout rows for better presentation */}
         <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-6">
@@ -183,14 +196,16 @@ export function ClientSection({ clients }: ClientSectionProps) {
                 if (sector) {
                   nodes.push(
                     <div key={sector._id} className={`col-span-1 ${row.spanClass}`}>
-                      <SectorCard
-                        title={sector.name}
-                        description={sector.description}
-                        companies={sector.companies}
-                        index={index}
-                      />
-                    </div>
-                  );
+                            <motion.div variants={revealVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index}>
+                              <SectorCard
+                                title={sector.name}
+                                description={sector.description}
+                                companies={sector.companies}
+                                index={index}
+                              />
+                            </motion.div>
+                          </div>
+                        );
                   index += 1;
                   sectorById.delete(id);
                 }
@@ -201,14 +216,16 @@ export function ClientSection({ clients }: ClientSectionProps) {
             for (const sector of sectorById.values()) {
               nodes.push(
                 <div key={sector._id} className={`col-span-1 md:col-span-6 lg:col-span-6`}>
-                  <SectorCard
-                    title={sector.name}
-                    description={sector.description}
-                    companies={sector.companies}
-                    index={index}
-                  />
-                </div>
-              );
+                    <motion.div variants={revealVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index}>
+                      <SectorCard
+                        title={sector.name}
+                        description={sector.description}
+                        companies={sector.companies}
+                        index={index}
+                      />
+                    </motion.div>
+                  </div>
+                );
               index += 1;
             }
 
