@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { CategoryBar } from "./CategoryBar";
 import { toast } from "sonner";
 import client from "@/lib/sanity";
+
+const contactCategories = ["HUMANITARIAN", "INSURANCE", "AUTOMOTIVE_DISTRIBUTION", "AVIATION", "BANKING", "MOBILE_TELECOMMUNICATIONS", "PETROLEUM", "AGRO_FOOD_BRASSICOLE"];
 
 type Sector = { _id: string; name: string };
 
@@ -23,6 +28,8 @@ export function ContactSection() {
   const [sectors, setSectors] = useState<Array<{ id: string; title: string; companies: string[] }>>(placeholderSectors);
   const [services, setServices] = useState<string[]>(placeholderServices);
   const [loading, setLoading] = useState(true);
+
+  const { t } = useTranslation();
 
   const sectorObj = sectors.find((s) => s.id === sector) ?? sectors[0] ?? { id: "", title: "", companies: [] };
 
@@ -96,31 +103,42 @@ export function ContactSection() {
   }
 
   return (
-    <main className="min-h-screen py-20 px-6 bg-background text-[var(--color-foreground)]">
-      <div className="max-w-4xl mx-auto bg-[var(--color-card)] p-8 rounded-2xl shadow-lg border border-[var(--color-border)]">
+    <section id="contact" className="py-24 px-4 bg-background">
+      <div className="max-w-2xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-bold text-center mb-8"
+        >
+         {t('sections.contact')}
+        </motion.h2>
+        <CategoryBar items={contactCategories} />
+  
+      <div className="max-w-4xl mx-auto bg-var-color-card p-8 rounded-2xl shadow-lg border border-var-color-border">
         <header className="mb-6">
           <h1 className="text-3xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Contactez MUNA'SPHERE</h1>
-          <p className="text-sm text-[var(--muted-foreground)] mt-2">Parlez-nous de votre projet — choisissez votre secteur, compagnie et le service souhaité.</p>
+          <p className="text-sm text-var-muted-foreground mt-2">Parlez-nous de votre projet — choisissez votre secteur, compagnie et le service souhaité.</p>
         </header>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="col-span-1">
-            <label className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Prénom</label>
+            <label className="text-xs font-semibold uppercase text-var-muted-foreground">Prénom</label>
             <input value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Prénom" required className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-background" />
           </div>
 
           <div className="col-span-1">
-            <label className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Nom</label>
+            <label className="text-xs font-semibold uppercase text-var-muted-foreground">Nom</label>
             <input value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Nom" required className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-background" />
           </div>
 
           <div className="col-span-1 md:col-span-2">
-            <label className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Téléphone</label>
+            <label className="text-xs font-semibold uppercase text-var-muted-foreground">Téléphone</label>
             <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+236 7X XX XX XX" required className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-background" />
           </div>
 
           <div>
-            <label className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Secteur d'activité</label>
+            <label className="text-xs font-semibold uppercase text-var-muted-foreground">Secteur d'activité</label>
             <select value={sector} onChange={(e) => { const val = e.target.value; setSector(val); const s = sectors.find((x) => x.id === val); setCompany(s?.companies?.[0] ?? ""); }} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-background" disabled={loading}>
               {sectors.map((s) => (
                 <option key={s.id} value={s.id}>{s.title}</option>
@@ -129,7 +147,7 @@ export function ContactSection() {
           </div>
 
           <div>
-            <label className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Compagnie</label>
+            <label className="text-xs font-semibold uppercase text-var-muted-foreground">Compagnie</label>
             <select value={company} onChange={(e) => setCompany(e.target.value)} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-background">
               {(sectorObj?.companies ?? []).map((c) => (
                 <option key={c} value={c}>{c}</option>
@@ -138,7 +156,7 @@ export function ContactSection() {
           </div>
 
           <div className="md:col-span-2">
-            <label className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Type de service souhaité</label>
+            <label className="text-xs font-semibold uppercase text-var-muted-foreground">Type de service souhaité</label>
             <select value={service} onChange={(e) => setService(e.target.value)} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-background" disabled={loading}>
               {services.map((s) => (
                 <option key={s} value={s}>{s}</option>
@@ -147,19 +165,20 @@ export function ContactSection() {
           </div>
 
           <div className="md:col-span-2">
-            <label className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Message</label>
+            <label className="text-xs font-semibold uppercase text-var-muted-foreground">Message</label>
             <textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Décrivez votre projet, brief ou question..." rows={6} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-background" />
           </div>
 
           <div className="md:col-span-2 flex items-center justify-between gap-4">
-            <div className="text-sm text-[var(--muted-foreground)]">Nous répondrons sous 48h.</div>
+            <div className="text-sm text-var-muted-foreground">Nous répondrons sous 48h.</div>
             <button type="submit" disabled={submitting} className="lime-btn px-6 py-3 rounded-lg font-semibold">
               {submitting ? "Envoi..." : "Envoyer la demande"}
             </button>
           </div>
         </form>
       </div>
-    </main>
+    </div>
+    </section>
   );
 }
 
