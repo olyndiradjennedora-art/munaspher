@@ -3,9 +3,8 @@
     "home": "Accueil",
     "about": "A Propos",
     "services": "Services",
-    "clients": "Nos Clients",
+    "clients": "Clients",
     "projects": "Réalisations",
-    "pubs": "Pubs",
     "blog": "Publications",
     "team": "Equipe",
     "contact": "Contact"
@@ -17,12 +16,13 @@
     "cta": "Découvrez nos services"
   },
   "sections": {
+    "about": "A Propos",
     "services": "Services",
     "clients": "Nos Clients",
     "projects": "Réalisations",
     "blog": "Publications",
     "team": "Equipe",
-    "about": "A Propos"
+    "contact": "Nous contacter"
   },
   "footer": {
     "about": "Agence de Conseil en Communication & Marketing Digital en République Centrafricaine.",

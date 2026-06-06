@@ -1,26 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import serviceBrand from "@/assets/service-brand.jpg";
 import client from "@/lib/sanity";
 
 type ServiceDetail = {
   _id?: string;
-  id?: string;
   title: string;
   description?: string;
   icon?: string;
-  image?: string;
   items?: string[];
 };
-
-const servicesData = [
-  { id: 'creative-design', title: "Création & Design", description: "Création de logos, design graphique et identités visuelles.", image: serviceBrand },
-  { id: 'media-production', title: "Média & Production", description: "Impression, production de gadgets promotionnels et achat d'espace publicitaire.", image: serviceBrand },
-  { id: 'digital', title: "Digital", description: "Stratégie de marketing digital, exécution de campagnes et analytics.", image: serviceBrand },
-  { id: 'public-relations', title: "Relations Publiques & Stratégie", description: "Relations presse, veille médiatique et stratégie de communication.", image: serviceBrand },
-  { id: 'events-field', title: "Terrain & Événementiel", description: "Activation de marque, organisation d'événements et opérations terrain.", image: serviceBrand },
-  { id: 'capacity-building', title: "Renforcement des capacités", description: "Formations spécialisées et ateliers pour équipes.", image: serviceBrand },
- ] satisfies ServiceDetail[];
 
 export const Route = createFileRoute("/services/$slug")({
   head: () => ({ meta: [{ title: "Service — MUNA'SPHERE-RCA" }] }),
@@ -30,28 +19,39 @@ export const Route = createFileRoute("/services/$slug")({
 function ServiceDetailPage() {
   const { slug } = Route.useParams();
   const [service, setService] = useState<ServiceDetail | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!slug) return;
-    // try to fetch from Sanity first
+    let mounted = true;
+    setLoading(true);
     client
       .fetch<ServiceDetail | null>(
         '*[_type == "service" && (slug.current == $slug || _id == $slug)][0]{_id, title, description, icon, items}',
         { slug },
       )
       .then((res) => {
-        if (res && (res.title || res.description)) {
-          setService(res);
-        } else {
-          const local = servicesData.find((s) => s.id === slug || slug === s.title?.toLowerCase().replace(/\s+/g, '-'));
-          setService(local || null);
-        }
+        if (!mounted) return;
+        setService(res ?? null);
+        setLoading(false);
       })
       .catch(() => {
-        const local = servicesData.find((s) => s.id === slug || slug === s.title?.toLowerCase().replace(/\s+/g, '-'));
-        setService(local || null);
+        if (!mounted) return;
+        setService(null);
+        setLoading(false);
       });
+    return () => { mounted = false; };
   }, [slug]);
+
+  if (loading) {
+    return (
+      <section className="py-24 px-4 bg-background">
+        <div className="max-w-4xl mx-auto">
+          <div className="h-64 rounded-lg bg-muted-foreground/10 animate-pulse" />
+        </div>
+      </section>
+    );
+  }
 
   if (!service) {
     return (
@@ -69,7 +69,7 @@ function ServiceDetailPage() {
       <div className="max-w-4xl mx-auto">
         <div className="rounded-lg overflow-hidden border bg-card">
           <div className="w-full h-64 bg-muted-foreground/5">
-            <img src={service.icon || (service.image ?? serviceBrand)} alt={service.title} className="w-full h-full object-cover" />
+            <img src={service.icon || serviceBrand} alt={service.title} className="w-full h-full object-cover" />
           </div>
           <div className="p-6">
             <h1 className="text-3xl font-bold mb-2">{service.title}</h1>

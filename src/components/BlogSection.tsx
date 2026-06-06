@@ -45,7 +45,7 @@ export function BlogSection() {
       ];
 
   return (
-    <section id="pubs" className="py-24 px-8 bg-background">
+    <section id="publications" className="py-24 px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="section-heading"
@@ -98,7 +98,7 @@ export function BlogSection() {
                     <div className="w-6 h-6 rounded-full bg-muted" />
                     <span className="text-xs font-semibold tracking-wider">{post.author || 'Equipe'}</span>
                   </div>
-                  <a href="/blog" className="flex items-center gap-1 text-xs font-semibold tracking-wider hover:text-lime transition-colors">
+                  <a href="/publications" className="flex items-center gap-1 text-xs font-semibold tracking-wider hover:text-lime transition-colors">
                     Plus d'infos <ArrowUpRight className="w-3 h-3" />
                   </a>
                 </div>

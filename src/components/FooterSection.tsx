@@ -1,17 +1,22 @@
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from 'react-i18next';
 import { Logo } from "./Logo";
-import heroBg from "@/assets/hero-bg.jpg";
-import about0 from "@/assets/about-0.png"
 
-const footerLinks = [
-  { title: "", items: ["home", "about", "services", "clients", "team"] },
-  { title: "", items: ["projects", "blog", "contact"] },
-  { title: "", items: ["privacy", "terms"] },
+const footerColumns = [
+  { heading: 'navigation', items: ["home", "about", "services", "clients", "team"] },
+  { heading: 'explore', items: ["projects", "blog", "contact"] },
+  { heading: 'legal', items: ["privacy", "terms"] },
 ];
 
 const bottomCategories = ["contact", "services", "projects", "team"];
+
+const socials = [
+  { Icon: Facebook, label: 'Facebook' },
+  { Icon: Twitter, label: 'Twitter' },
+  { Icon: Instagram, label: 'Instagram' },
+  { Icon: Linkedin, label: 'LinkedIn' },
+];
 
 function hrefFor(key: string) {
   switch (key) {
@@ -34,42 +39,54 @@ export function FooterSection() {
   const { t } = useTranslation();
 
   return (
-    <footer id="contact" className="relative footer-gradient text-hero-foreground overflow-hidden">
-      <img
-        src={heroBg}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover mix-blend-normal opacity-70"
-        loading="lazy"
-        width={1920}
-        height={1080}
-      />
+    <footer id="site-footer" className="relative footer-gradient text-hero-foreground border-t border-hero-foreground/10">
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-8 pt-20 pb-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+            {/* Brand + contact */}
+            <div className="lg:col-span-2">
               <Logo className="text-hero-foreground" />
-              <p className="mt-4 text-xs text-hero-foreground/60 leading-relaxed tracking-wider uppercase" style={{ fontFamily: 'var(--font-body)' }}>
+              <p className="mt-4 max-w-sm text-sm text-hero-foreground/60 leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
                 {t('footer.about')}
               </p>
+
+              <ul className="mt-6 space-y-3 text-sm text-hero-foreground/70">
+                <li className="flex items-center gap-3">
+                  <Mail className="w-4 h-4 text-lime shrink-0" />
+                  <a href="mailto:contact@munasphere.com" className="hover:text-lime transition-colors">contact@munasphere.com</a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone className="w-4 h-4 text-lime shrink-0" />
+                  <a href="tel:+23600000000" className="hover:text-lime transition-colors">+236 00 00 00 00</a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <MapPin className="w-4 h-4 text-lime shrink-0" />
+                  <span>Bangui, République Centrafricaine</span>
+                </li>
+              </ul>
+
               <div className="flex gap-3 mt-6">
-                {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
-                  <a key={i} href="/contact" className="w-8 h-8 rounded-full bg-hero-foreground/20 flex items-center justify-center hover:bg-lime hover:text-lime-foreground transition-colors">
-                    <Icon className="w-3.5 h-3.5" />
+                {socials.map(({ Icon, label }) => (
+                  <a key={label} href="/contact" aria-label={label} className="w-9 h-9 rounded-full bg-hero-foreground/10 flex items-center justify-center hover:bg-lime hover:text-lime-foreground transition-colors">
+                    <Icon className="w-4 h-4" />
                   </a>
                 ))}
               </div>
             </div>
 
-            {footerLinks.map((col, i) => (
-              <div key={i}>
+            {/* Link columns */}
+            {footerColumns.map((col) => (
+              <div key={col.heading}>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-hero-foreground/40 mb-4" style={{ fontFamily: 'var(--font-body)' }}>
+                  {col.heading}
+                </h4>
                 <ul className="space-y-3">
                   {col.items.map((key) => {
                     const label = key === 'privacy' ? t('footer.policies') : key === 'pubs' ? t('nav.pubs') : t(`nav.${key}`);
-                    const href = hrefFor(key);
                     return (
                       <li key={key}>
-                        <a href={href} className="text-xs tracking-widest text-hero-foreground/60 hover:text-lime transition-colors uppercase" style={{ fontFamily: 'var(--font-body)' }}>
-                          {label ? label.toUpperCase() : key.toUpperCase()}
+                        <a href={hrefFor(key)} className="text-sm text-hero-foreground/60 hover:text-lime transition-colors" style={{ fontFamily: 'var(--font-body)' }}>
+                          {label || key}
                         </a>
                       </li>
                     );
@@ -82,7 +99,7 @@ export function FooterSection() {
 
         {/* Giant GET IN TOUCH */}
         <div className="max-w-7xl mx-auto px-8 pb-8">
-          <div className="relative">
+          <div className="relative border-t border-hero-foreground/10 pt-10">
             <motion.h2
               className="font-black leading-[0.85] tracking-tight text-hero-foreground"
               style={{

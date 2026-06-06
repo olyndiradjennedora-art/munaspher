@@ -114,7 +114,7 @@ export function ProjectsSection() {
                   <span key={tag} className="lime-badge text-[0.6rem]">{tag}</span>
                 ))}
               </div>
-              <a href="/projects" className="lime-btn w-10 h-10 rounded-full flex items-center justify-center absolute -top-12 left-0">
+              <a href="/projects" className="lime-btn w-15 h-10 rounded-4xl flex items-center justify-center absolute -top-12 left-0">
                 <span className="text-[0.5rem] font-bold">SEE →<br />PROJECT</span>
               </a>
             </div>

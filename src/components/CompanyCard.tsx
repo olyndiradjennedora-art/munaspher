@@ -25,9 +25,9 @@ export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
   const imageUrl = getImageUrl(logo);
 
   return (
-    <div className="group relative min-h-[64px] bg-[var(--card)] text-[var(--card-foreground)] rounded-lg border border-[var(--color-border)] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center p-2 overflow-hidden">
+    <div className="group relative min-h-[64px] bg-var-card text-var-card-foreground rounded-lg border border-var-color-border shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center p-2 overflow-hidden">
       {/* Gradient background on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-br from-var-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full gap-2">
         {/* Logo Container */}
@@ -40,8 +40,8 @@ export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
               onError={() => setImageError(true)}
             />
           ) : (
-            <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[var(--secondary)] to-[var(--primary)] flex items-center justify-center border border-[var(--color-border)] group-hover:border-[var(--primary)] transition-colors">
-              <span className="text-base font-bold text-[var(--section-light)]">
+            <div className="w-14 h-14 rounded-lg bg-blue-400 flex items-center justify-center border border-blue-400 group-hover:border-blue-500 transition-colors">
+              <span className="text-base font-bold text-white">
                 {name.charAt(0).toUpperCase()}
               </span>
             </div>
@@ -49,13 +49,13 @@ export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
         </div>
 
         {/* Company Name */}
-        <p className="text-sm font-medium text-[var(--muted-foreground)] text-center line-clamp-2 group-hover:text-[var(--color-foreground)] transition-colors">
+        <p className="text-sm font-medium text-var-muted-foreground text-center line-clamp-2 group-hover:text-var-color-foreground transition-colors">
           {name}
         </p>
       </div>
 
       {/* Bottom accent line */}
-      <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] group-hover:w-full transition-all duration-300" />
+      <div className="absolute bottom-0 left-0 w-0 h-1 bg-blue-400 group-hover:w-full transition-all duration-300" />
     </div>
   );
 }

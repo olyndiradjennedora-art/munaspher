@@ -4,11 +4,10 @@ import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
 import { ServicesGridSection } from "@/components/ServicesGridSection";
 import { ClientSection } from "@/components/ClientSection";
-import { StatsSection } from "@/components/StatsSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { TeamGridSection } from "@/components/TeamGridSection";
-import { TestimonialSection } from "@/components/TestimonialSection";
 import { BlogSection } from "@/components/BlogSection";
+import { ContactSection } from "@/components/ContactSection";
 import { FooterSection } from "@/components/FooterSection";
 
 export const Route = createFileRoute("/")({
@@ -31,11 +30,10 @@ function Index() {
       <AboutSection />
       <ServicesGridSection />
       <ClientSection />
-      <StatsSection />
       <ProjectsSection />
-      <TeamGridSection />
-      <TestimonialSection />
       <BlogSection />
+      <TeamGridSection />
+      <ContactSection />
       <FooterSection />
     </div>
   );

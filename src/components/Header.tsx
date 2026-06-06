@@ -30,9 +30,10 @@ export function Header() {
     { label: t('nav.services'), href: '/services', anchor: 'services' },
     { label: t('nav.clients'), href: '/clients', anchor: 'clients' },
     { label: t('nav.projects'), href: '/projects', anchor: 'projects' },
-    { label: t('nav.pubs'), href: '/pubs', anchor: 'pubs' },
+    { label: t('nav.blog'), href: '/publications', anchor: 'publications' },
     { label: t('nav.team'), href: '/team', anchor: 'team' },
-    { label: t('nav.contact'), href: '/contact', anchor: 'contact' },
+    // Ensure contact always navigates to the dedicated contact page instead of scrolling to footer on the home page
+    { label: t('nav.contact'), href: '/contact', anchor: '' },
   ];
 
   // If user is already on the homepage, scroll to the section instead of navigating
@@ -91,7 +92,7 @@ export function Header() {
             </button>
           </div>
 
-          <a href="/contact" onClick={(e) => handleNavClick(e, '/contact', 'contact')} className="lime-btn px-4 py-2 text-sm">
+          <a href="/contact" onClick={(e) => handleNavClick(e, '/contact', '')} className="lime-btn px-4 py-2 text-sm">
             <ArrowUpRight className="w-4 h-4" />
             {t('footer.contact_cta')}
           </a>
@@ -104,13 +105,13 @@ export function Header() {
           <a
             key={item.label}
             href={item.href}
-          onClick={(e) => handleNavClick(e, item.href, item.anchor)}
-          className="text-xs font-semibold text-[var(--color-foreground)]/80 hover:text-[var(--color-foreground)] px-2 py-1"
-          style={{ fontFamily: 'var(--font-body)' }}
-        >
-          {item.label}
-        </a>
-      ))}
+            onClick={(e) => handleNavClick(e, item.href, item.anchor)}
+            className="text-xs font-semibold text-[var(--color-foreground)]/80 hover:text-[var(--color-foreground)] px-2 py-1"
+            style={{ fontFamily: 'var(--font-body)' }}
+          >
+            {item.label}
+          </a>
+        ))}
       </nav>
     </header>
   );

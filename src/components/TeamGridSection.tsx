@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { CategoryBar } from "./CategoryBar";
 import team1 from "@/assets/team-1.jpg";
 import team2 from "@/assets/team-2.jpg";
 import team3 from "@/assets/team-3.jpg";
 import team4 from "@/assets/team-4.jpg";
 import client from "@/lib/sanity";
+
+const teamCategories = ["LEADERSHIP", "FINANCE", "SALES", "DIGITAL", "CREATIVE", "LOGISTICS", "DESIGN", "SUPPORT"];
 
 const fallbackMembers = [
   { name: "NJANJO EDIMO", role: "Directeur Général", image: team1 },
@@ -63,7 +66,7 @@ export function TeamGridSection() {
         >
           {t('sections.team')}
         </motion.h2>
-
+        <CategoryBar items={teamCategories} />
         <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
           {firstRow.map((member, i) => (
             <motion.div key={member.name + i} className="group" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: i * 0.05 }}>

@@ -3,9 +3,8 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
-    "clients": "Our Clients",
+    "clients": "Clients",
     "projects": "Portfolio",
-    "pubs": "Ads",
     "blog": "Publications",
     "team": "Team",
     "contact": "Contact"
@@ -17,12 +16,13 @@
     "cta": "Discover our services"
   },
   "sections": {
+    "about": "About",
     "services": "Services",
-    "clients": "Our Clients",
+    "clients": "Ours Clients",
     "projects": "Portfolio",
     "blog": "Publications",
     "team": "Team",
-    "about": "About"
+    "contact": "Contact Us"
   },
   "footer": {
     "about": "Communication & Digital Marketing Consulting Agency in the Central African Republic.",
