@@ -10,6 +10,8 @@ i18n.use(initReactI18next).init({
   },
   lng: 'fr',
   fallbackLng: 'fr',
+  supportedLngs: ['fr', 'en'],
+  initImmediate: false,
   interpolation: { escapeValue: false },
 })
 

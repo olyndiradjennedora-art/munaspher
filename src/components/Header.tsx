@@ -2,17 +2,18 @@ import { useEffect, useState, type MouseEvent } from 'react';
 import { Logo } from "./Logo";
 import { ArrowUpRight } from "lucide-react";
 import { useTranslation } from 'react-i18next';
+import configuredI18n from "@/i18n";
 
 export function Header() {
-  const { t, i18n } = useTranslation();
-  const [lang, setLang] = useState<string>(() => (typeof window !== 'undefined' ? localStorage.getItem('lang') || i18n.language || 'fr' : 'fr'));
+  const { t } = useTranslation();
+  const [lang, setLang] = useState<string>(() => (typeof window !== 'undefined' ? localStorage.getItem('lang') || configuredI18n.language || 'fr' : 'fr'));
 
   useEffect(() => {
     if (!lang) return;
 
-    // Only react to changes in `lang` (i18n object may be unstable across renders).
-    if (i18n.language !== lang) {
-      i18n.changeLanguage(lang).catch(() => {});
+    // Only react to changes in `lang`.
+    if (configuredI18n.language !== lang) {
+      configuredI18n.changeLanguage(lang).catch(() => {});
     }
 
     try {

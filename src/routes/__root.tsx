@@ -1,7 +1,8 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { I18nextProvider } from "react-i18next";
 
 import appCss from "../styles.css?url";
-import "../i18n";
+import i18n from "../i18n";
 import { Header } from "@/components/Header";
 
 function NotFoundComponent() {
@@ -71,12 +72,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   // Add site-wide header so navbar is present on every page
   return (
-    <>
+    <I18nextProvider i18n={i18n}>
       <Header />
       {/* Add top padding to avoid content being hidden behind the fixed header */}
       <div className="pt-20">
         <Outlet />
       </div>
-    </>
+    </I18nextProvider>
   );
 }
