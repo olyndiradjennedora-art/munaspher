@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { imageUrlFor } from "@/lib/sanity";
 // Local fallback type for Sanity images to avoid requiring @types/sanity during dev type-checks
 // Use 'unknown' to avoid eslint rule against explicit 'any'
 type SanityImageAsset = { asset?: { _ref?: string; _type?: string }; alt?: string };
@@ -12,14 +13,14 @@ interface CompanyCardProps {
 export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
   const [imageError, setImageError] = useState(false);
 
-  // Simplified image handling to avoid external dependencies in dev
+  // Build image URL from Sanity asset reference
   const getImageUrl = (logoObj?: SanityImageAsset | undefined) => {
     const ref = logoObj?.asset?._ref;
     if (!ref) return null;
-    // If we receive a full URL (unlikely), return as-is
+    // If we already have an absolute URL, return as-is
     if (ref.startsWith("http")) return ref;
-    // Otherwise avoid constructing fragile Sanity CDN URLs here; return null so fallback avatar is used
-    return null;
+    // Use central helper to construct a stable CDN URL
+    return imageUrlFor(ref);
   };
 
   const imageUrl = getImageUrl(logo);
