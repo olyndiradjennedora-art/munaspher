@@ -42,7 +42,7 @@ const SECTORS_QUERY = `*[_type == "sector"] | order(order asc, name asc){
 }`;
 
 const SERVICES_QUERY = `*[_type == "service"] | order(order asc, title asc){
-  _id, title, slug, category, description, icon
+  _id, title, slug, category, description, "icon": icon.asset->_ref
 }`;
 
 interface AsyncState<T> {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import serviceBrand from "@/assets/service-brand.jpg";
-import client from "@/lib/sanity";
+import client, { imageUrlFor } from "@/lib/sanity";
 
 type ServiceDetail = {
   _id?: string;
@@ -69,7 +69,7 @@ function ServiceDetailPage() {
       <div className="max-w-4xl mx-auto">
         <div className="rounded-lg overflow-hidden border bg-card">
           <div className="w-full h-64 bg-muted-foreground/5">
-            <img src={service.icon || serviceBrand} alt={service.title} className="w-full h-full object-cover" />
+            <img src={(service.icon ? imageUrlFor(service.icon) : null) || serviceBrand} alt={service.title} className="w-full h-full object-cover" />
           </div>
           <div className="p-6">
             <h1 className="text-3xl font-bold mb-2">{service.title}</h1>
