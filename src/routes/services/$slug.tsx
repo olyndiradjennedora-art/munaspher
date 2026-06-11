@@ -7,7 +7,7 @@ type ServiceDetail = {
   _id?: string;
   title: string;
   description?: string;
-  icon?: string;
+  icon?: { asset?: { _ref?: string; url?: string }; alt?: string } | string;
   items?: string[];
 };
 

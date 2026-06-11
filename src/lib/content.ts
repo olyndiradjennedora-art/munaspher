@@ -31,7 +31,8 @@ export interface Service {
   slug?: string | { current?: string };
   category?: string;
   description?: string;
-  icon?: string;
+  // Accept either a Sanity image object or a ref string for compatibility
+  icon?: SanityImage | string;
 }
 
 const SECTORS_QUERY = `*[_type == "sector"] | order(order asc, name asc){
@@ -41,8 +42,9 @@ const SECTORS_QUERY = `*[_type == "sector"] | order(order asc, name asc){
   }
 }`;
 
+// Request the full icon image object from Sanity so imageUrlFor can derive a URL (asset._ref or asset.url)
 const SERVICES_QUERY = `*[_type == "service"] | order(order asc, title asc){
-  _id, title, slug, category, description, "icon": icon.asset->_ref
+  _id, title, slug, category, description, icon
 }`;
 
 interface AsyncState<T> {
