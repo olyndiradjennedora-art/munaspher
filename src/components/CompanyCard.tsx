@@ -6,16 +6,16 @@ type SanityImageAsset = { asset?: { _ref?: string; _type?: string }; alt?: strin
 
 interface CompanyCardProps {
   name: string;
-  logo?: SanityImageAsset;
+  image?: SanityImageAsset;
   index?: number;
 }
 
-export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
+export function CompanyCard({ name, image, index = 0 }: CompanyCardProps) {
   const [imageError, setImageError] = useState(false);
 
   // Build image URL from Sanity asset reference
-  const getImageUrl = (logoObj?: SanityImageAsset | undefined) => {
-    const ref = logoObj?.asset?._ref;
+  const getImageUrl = (imageObj?: SanityImageAsset | undefined) => {
+    const ref = imageObj?.asset?._ref;
     if (!ref) return null;
     // If we already have an absolute URL, return as-is
     if (ref.startsWith("http")) return ref;
@@ -23,40 +23,36 @@ export function CompanyCard({ name, logo, index = 0 }: CompanyCardProps) {
     return imageUrlFor(ref);
   };
 
-  const imageUrl = getImageUrl(logo);
+  const imageUrl = getImageUrl(image);
 
   return (
-    <div className="group relative min-h-[64px] bg-var-card text-var-card-foreground rounded-lg border border-var-color-border shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center p-2 overflow-hidden">
-      {/* Gradient background on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-var-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-      <div className="relative z-10 flex flex-col items-center justify-center h-full gap-2">
-        {/* Logo Container */}
-        <div className="h-16 flex items-center justify-center mb-1">
-          {imageUrl && !imageError ? (
-            <img
-              src={imageUrl}
-              alt={name}
-              className="max-h-full max-w-[90%] object-contain group-hover:scale-110 transition-transform duration-300"
-              onError={() => setImageError(true)}
-            />
-          ) : (
-            <div className="w-14 h-14 rounded-lg bg-blue-400 flex items-center justify-center border border-blue-400 group-hover:border-blue-500 transition-colors">
-              <span className="text-base font-bold text-white">
-                {name.charAt(0).toUpperCase()}
-              </span>
-            </div>
-          )}
-        </div>
-
-        {/* Company Name */}
-        <p className="text-sm font-medium text-var-muted-foreground text-center line-clamp-2 group-hover:text-var-color-foreground transition-colors">
-          {name}
-        </p>
+    <div className="group relative bg-[var(--color-card)] text-[var(--color-card-foreground)] rounded-lg border border-[var(--color-border)] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+      {/* Image principale (vraie image, object-cover) */}
+      <div className="relative w-full h-28 bg-[var(--color-muted)]">
+        {imageUrl && !imageError ? (
+          <img
+            src={imageUrl}
+            alt={name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            onError={() => setImageError(true)}
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full bg-[var(--color-primary)] flex items-center justify-center">
+            <span className="text-2xl font-bold text-[var(--color-primary-foreground)]">
+              {name.charAt(0).toUpperCase()}
+            </span>
+          </div>
+        )}
       </div>
 
+      {/* Company Name */}
+      <p className="px-2 py-2 text-sm font-medium text-center text-[var(--color-foreground)] line-clamp-2">
+        {name}
+      </p>
+
       {/* Bottom accent line */}
-      <div className="absolute bottom-0 left-0 w-0 h-1 bg-blue-400 group-hover:w-full transition-all duration-300" />
+      <div className="absolute bottom-0 left-0 w-0 h-1 bg-[var(--color-primary)] group-hover:w-full transition-all duration-300" />
     </div>
   );
 }

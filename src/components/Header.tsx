@@ -1,6 +1,6 @@
 import { useEffect, useState, type MouseEvent } from 'react';
 import { Logo } from "./Logo";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Sun, Moon } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 import configuredI18n from "@/i18n";
 
@@ -23,6 +23,31 @@ export function Header() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang]);
+
+  const [theme, setTheme] = useState<string>(() => {
+    if (typeof window === 'undefined') return 'light';
+    try {
+      const stored = localStorage.getItem('theme');
+      if (stored) return stored;
+    } catch {
+      // ignore
+    }
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      localStorage.setItem('theme', theme);
+    } catch {
+      // ignore storage errors
+    }
+  }, [theme]);
 
   // Use direct route links and anchors so navbar navigates to pages, and scrolls to sections when on the homepage
   const navItems = [
@@ -92,6 +117,15 @@ export function Header() {
               EN
             </button>
           </div>
+
+          <button
+            aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="p-2 rounded-full text-[var(--color-foreground)]/90 hover:bg-[var(--color-card)] transition-colors"
+            title={theme === 'dark' ? 'Sombre' : 'Clair'}
+          >
+            {theme === 'dark' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+          </button>
 
           <a href="/contact" onClick={(e) => handleNavClick(e, '/contact', '')} className="lime-btn px-4 py-2 text-sm">
             <ArrowUpRight className="w-4 h-4" />

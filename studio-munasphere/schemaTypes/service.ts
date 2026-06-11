@@ -23,8 +23,24 @@ export default defineType({
   },
   {
     name: 'description',
-    title: 'Description',
-    type: 'text'
+    title: 'Description courte',
+    type: 'text',
+    description: 'Résumé affiché sur la carte du service',
+    rows: 3
+  },
+  {
+    name: 'detailedDescription',
+    title: 'Description détaillée',
+    type: 'text',
+    description: 'Texte complet affiché sur la page du service (séparez les paragraphes par une ligne vide)',
+    rows: 10
+  },
+  {
+    name: 'features',
+    title: 'Prestations',
+    type: 'array',
+    of: [{type: 'string'}],
+    description: 'Liste des prestations incluses dans ce service'
   },
   {
     name: 'image',
@@ -33,6 +49,19 @@ export default defineType({
     options: {
       hotspot: true
     }
+  },
+  {
+    name: 'order',
+    title: 'Ordre d\'affichage',
+    type: 'number',
+    description: 'Numéro pour trier les services'
   }
 ],
+preview: {
+  select: {
+    title: 'title',
+    subtitle: 'category',
+    media: 'image'
+  }
+}
 })

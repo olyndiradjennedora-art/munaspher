@@ -75,6 +75,7 @@ export function ProjectsSection() {
       <div className="max-w-7xl mx-auto">
         <div className="relative">
           <motion.h2
+            style={{fontSize : "50px"}}
             className="section-heading"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}

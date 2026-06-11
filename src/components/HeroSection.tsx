@@ -11,8 +11,7 @@ export function HeroSection() {
       <img
         src={about0}
         alt=""
-        className="absolute inset-0 w-full h-full  opacity-60"
-        style={{ mixBlendMode: 'multiply' }}
+        className="absolute inset-0 w-full h-full hero-image"
         width={1920}
         height={1080}
       />

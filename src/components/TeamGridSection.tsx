@@ -58,6 +58,7 @@ export function TeamGridSection() {
     <section id="team" className="py-24 px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.h2
+          style={{fontSize : "50px"}}
           className="section-heading"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}

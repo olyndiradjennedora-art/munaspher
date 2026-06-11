@@ -5,6 +5,7 @@ import { CategoryBar } from "./CategoryBar";
 import { SectorCard } from "./SectorCard";
 import { useSectors } from "@/lib/content";
 
+
 const revealVariants: Variants = {
   hidden: { opacity: 0 },
   visible: (i = 0) => ({ opacity: 1, transition: { duration: 0.6, delay: i * 0.08 } }),
@@ -27,6 +28,7 @@ export function ClientSection() {
     <section id="clients" className="py-24 px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.h2
+          style={{fontSize : "50px"}}
           className="section-heading"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}

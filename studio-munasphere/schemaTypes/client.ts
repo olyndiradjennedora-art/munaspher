@@ -20,8 +20,8 @@ export default defineType({
       },
     },
     {
-      name: 'logo',
-      title: 'Logo',
+      name: 'image',
+      title: 'Image',
       type: 'image',
       options: {
         hotspot: true,
@@ -45,7 +45,7 @@ export default defineType({
   preview: {
     select: {
       title: 'name',
-      media: 'logo',
+      media: 'image',
       subtitle: 'sector.name',
     },
   },

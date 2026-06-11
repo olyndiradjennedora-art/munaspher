@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, LocateFixed } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from 'react-i18next';
 import { Logo } from "./Logo";
@@ -52,18 +52,22 @@ export function FooterSection() {
 
               <ul className="mt-6 space-y-3 text-sm text-hero-foreground/70">
                 <li className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-lime shrink-0" />
-                  <a href="mailto:contact@munasphere.com" className="hover:text-lime transition-colors">contact@munasphere.com</a>
+                  <MapPin className="w-4 h-4 text-lime shrink-0" />
+                  <span>Avenue des martyrs Stade 20.000 places Bureau N° 10</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-lime shrink-0" />
-                  <a href="tel:+23600000000" className="hover:text-lime transition-colors">+236 00 00 00 00</a>
+                  <a href="tel:+23672267073" className="hover:text-lime transition-colors">+236 72 26 70 73 / 75 64 99 99 / 72 06 37 57</a>
                 </li>
                 <li className="flex items-center gap-3">
-                  <MapPin className="w-4 h-4 text-lime shrink-0" />
+                  <Mail className="w-4 h-4 text-lime shrink-0" />
+                  <a href="mailto:njanjoedimo@gmail.com" className="hover:text-lime transition-colors">njanjoedimo@gmail.com</a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <LocateFixed className="w-4 h-4 text-lime shrink-0" />
                   <span>Bangui, République Centrafricaine</span>
                 </li>
-              </ul>
+            </ul>
 
               <div className="flex gap-3 mt-6">
                 {socials.map(({ Icon, label }) => (
@@ -101,11 +105,8 @@ export function FooterSection() {
         <div className="max-w-7xl mx-auto px-8 pb-8">
           <div className="relative border-t border-hero-foreground/10 pt-10">
             <motion.h2
+              style={{fontSize : "50px", fontFamily : 'var(--font-body)'}}
               className="font-black leading-[0.85] tracking-tight text-hero-foreground"
-              style={{
-                fontSize: 'clamp(3rem, 9vw, 9rem)',
-                fontFamily: 'var(--font-body)',
-              }}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

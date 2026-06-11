@@ -13,7 +13,7 @@ export interface SanityImage {
 export interface Company {
   _id: string;
   name: string;
-  logo?: SanityImage;
+  image?: SanityImage;
   order?: number;
 }
 
@@ -31,20 +31,25 @@ export interface Service {
   slug?: string | { current?: string };
   category?: string;
   description?: string;
-  // Accept either a Sanity image object or a ref string for compatibility
-  icon?: SanityImage | string;
+  detailedDescription?: string;
+  features?: string[];
+  // Vraie image du service (objet image Sanity ou ref string selon la source)
+  image?: SanityImage | string;
 }
 
+// `coalesce(image, logo)` : on lit le nouveau champ `image` et on retombe sur
+// l'ancien `logo` tant que les documents existants n'ont pas été migrés.
 const SECTORS_QUERY = `*[_type == "sector"] | order(order asc, name asc){
   _id, name, description, order,
   "companies": *[_type == "client" && references(^._id)] | order(order asc, name asc){
-    _id, name, logo, order
+    _id, name, "image": coalesce(image, logo), order
   }
 }`;
 
-// Request the full icon image object from Sanity so imageUrlFor can derive a URL (asset._ref or asset.url)
+// On récupère l'objet image complet pour qu'imageUrlFor en dérive l'URL CDN.
 const SERVICES_QUERY = `*[_type == "service"] | order(order asc, title asc){
-  _id, title, slug, category, description, icon
+  _id, title, slug, category, description, detailedDescription, features,
+  "image": coalesce(image, icon)
 }`;
 
 interface AsyncState<T> {

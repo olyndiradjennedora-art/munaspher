@@ -50,9 +50,9 @@ export function ServicesGridSection() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {services.map((service, idx) => {
                   const slug = serviceSlug(service);
-                  const iconUrl = service.icon ? imageUrlFor(service.icon) : null;
+                  const imageUrl = service.image ? imageUrlFor(service.image) : null;
                   const fallbackLocal = localServiceImgs[idx % localServiceImgs.length] || serviceBrand;
-                  const imgSrc = iconUrl || fallbackLocal || serviceBrand;
+                  const imgSrc = imageUrl || fallbackLocal || serviceBrand;
                   return (
                     <a key={slug} href={`/services/${slug}`} className="block rounded-lg overflow-hidden border border-border bg-card hover:shadow-lg transition-shadow">
                       <div className="w-full h-44 bg-muted-foreground/5">
