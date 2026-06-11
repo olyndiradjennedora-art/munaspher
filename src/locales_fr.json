@@ -28,7 +28,45 @@
     "about": "Agence de Conseil en Communication & Marketing Digital en République Centrafricaine.",
     "contact_cta": "Nous contacter",
     "copyright": "COPYRIGHT 2026 ALL RIGHTS RESERVED",
-    "policies": "POLITIQUE DE CONFIDENTIALITÉ"
+    "policies": "POLITIQUE DE CONFIDENTIALITÉ",
+    "address": "Avenue des martyrs Stade 20.000 places Bureau N° 10",
+    "phone_display": "+236 72 26 70 73 / 75 64 99 99 / 72 06 37 57",
+    "email_display": "njanjoedimo@gmail.com",
+    "location": "Bangui, République Centrafricaine",
+    "terms": "CONDITIONS D'UTILISATION",
+    "columns": {
+      "navigation": "Navigation",
+      "explore": "Explorer",
+      "legal": "Mentions légales"
+    }
+  },
+  "contact": {
+    "heading_prefix": "Démarrons la",
+    "heading_highlight": "conversation",
+    "intro": "Que vous ayez un projet précis ou que vous souhaitiez simplement explorer ce que nous pouvons faire ensemble — nous sommes là.",
+    "available": "Nous sommes disponibles 24h/24.",
+    "errors": {
+      "missing_fields": "Veuillez renseigner votre nom, prénom et téléphone.",
+      "send_error": "Erreur lors de l'envoi. Réessayez plus tard.",
+      "send_success": "Message envoyé — Nous vous contacterons bientôt.",
+      "sending": "Envoi...",
+      "submit": "Envoyer la demande"
+    },
+    "form": {
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "phone": "Téléphone",
+      "sector": "Secteur d'activité",
+      "company": "Compagnie",
+      "service": "Type de service souhaité",
+      "message": "Message",
+      "placeholders": {
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "phone": "+236 7X XX XX XX",
+        "message": "Décrivez votre projet, brief ou question..."
+      }
+    }
   },
   "about": {
     "badge": "QUI SOMMES-NOUS ?",
@@ -37,5 +75,13 @@
     "cta": "DÉCOUVRIR",
     "cta2": "NOTRE ÉQUIPE",
     "extra": "Forte d'une équipe enthousiaste, multiculturelle, professionnelle, créative et dynamique, l'agence offre une palette de services répondant à tout les besoins des Clients."
+  },
+  "errors": {
+    "404": {
+      "code": "404",
+      "heading": "Page introuvable",
+      "description": "La page recherchée n'existe pas ou a été déplacée.",
+      "go_home": "Retour à l'accueil"
+    }
   }
 }

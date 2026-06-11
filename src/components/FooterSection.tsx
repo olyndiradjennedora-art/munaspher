@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Logo } from "./Logo";
 
 const footerColumns = [
-  { heading: 'navigation', items: ["home", "about", "services", "clients", "team"] },
-  { heading: 'explore', items: ["projects", "blog", "contact"] },
-  { heading: 'legal', items: ["privacy", "terms"] },
+  { heading: 'footer.columns.navigation', items: ["home", "about", "services", "clients", "team"] },
+  { heading: 'footer.columns.explore', items: ["projects", "blog", "contact"] },
+  { heading: 'footer.columns.legal', items: ["privacy", "terms"] },
 ];
 
 const bottomCategories = ["contact", "services", "projects", "team"];
@@ -53,19 +53,19 @@ export function FooterSection() {
               <ul className="mt-6 space-y-3 text-sm text-hero-foreground/70">
                 <li className="flex items-center gap-3">
                   <MapPin className="w-4 h-4 text-lime shrink-0" />
-                  <span>Avenue des martyrs Stade 20.000 places Bureau N° 10</span>
+                  <span>{t('footer.address')}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-lime shrink-0" />
-                  <a href="tel:+23672267073" className="hover:text-lime transition-colors">+236 72 26 70 73 / 75 64 99 99 / 72 06 37 57</a>
+                  <a href="tel:+23672267073" className="hover:text-lime transition-colors">{t('footer.phone_display')}</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-lime shrink-0" />
-                  <a href="mailto:njanjoedimo@gmail.com" className="hover:text-lime transition-colors">njanjoedimo@gmail.com</a>
+                  <a href="mailto:njanjoedimo@gmail.com" className="hover:text-lime transition-colors">{t('footer.email_display')}</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <LocateFixed className="w-4 h-4 text-lime shrink-0" />
-                  <span>Bangui, République Centrafricaine</span>
+                  <span>{t('footer.location')}</span>
                 </li>
             </ul>
 
@@ -82,7 +82,7 @@ export function FooterSection() {
             {footerColumns.map((col) => (
               <div key={col.heading}>
                 <h4 className="text-xs font-bold uppercase tracking-widest text-hero-foreground/40 mb-4" style={{ fontFamily: 'var(--font-body)' }}>
-                  {col.heading}
+                                  {t(col.heading)}
                 </h4>
                 <ul className="space-y-3">
                   {col.items.map((key) => {
@@ -141,7 +141,7 @@ export function FooterSection() {
           <div className="flex gap-6 mt-2 md:mt-0">
             <a href="/privacy" className="hover:text-hero-foreground transition-colors">{t('footer.policies')}</a>
             <span>|</span>
-            <a href="/terms" className="hover:text-hero-foreground transition-colors">TERM OF SERVICE</a>
+            <a href="/terms" className="hover:text-hero-foreground transition-colors">{t('footer.terms')}</a>
           </div>
         </div>
       </div>

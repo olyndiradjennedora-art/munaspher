@@ -28,7 +28,45 @@
     "about": "Communication & Digital Marketing Consulting Agency in the Central African Republic.",
     "contact_cta": "Contact us",
     "copyright": "COPYRIGHT 2026 ALL RIGHTS RESERVED",
-    "policies": "Privacy Policy"
+    "policies": "Privacy Policy",
+    "address": "Avenue des martyrs Stade 20.000 places Bureau N° 10",
+    "phone_display": "+236 72 26 70 73 / 75 64 99 99 / 72 06 37 57",
+    "email_display": "njanjoedimo@gmail.com",
+    "location": "Bangui, Central African Republic",
+    "terms": "TERM OF SERVICE",
+    "columns": {
+      "navigation": "Navigation",
+      "explore": "Explore",
+      "legal": "Legal"
+    }
+  },
+  "contact": {
+    "heading_prefix": "Dare to",
+    "heading_highlight": "start the conversation",
+    "intro": "Whether you have a specific project or just want to explore what we can do together — we are here.",
+    "available": "We are available 24/7.",
+    "errors": {
+      "missing_fields": "Please provide your first name, last name and phone number.",
+      "send_error": "Error sending message. Please try again later.",
+      "send_success": "Message sent — We will contact you soon.",
+      "sending": "Sending...",
+      "submit": "Send request"
+    },
+    "form": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "sector": "Sector",
+      "company": "Company",
+      "service": "Requested service",
+      "message": "Message",
+      "placeholders": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "phone": "+236 7X XX XX XX",
+        "message": "Describe your project, brief or question..."
+      }
+    }
   },
   "about": {
     "badge": "WHO ARE WE?",
@@ -37,5 +75,13 @@
     "cta": "DISCOVER",
     "cta2": "OUR TEAM",
     "extra": "With an enthusiastic, multicultural, professional, creative and dynamic team, the agency offers a range of services that meet all our clients' needs."
+  },
+  "errors": {
+    "404": {
+      "code": "404",
+      "heading": "Page not found",
+      "description": "The page you're looking for doesn't exist or has been moved.",
+      "go_home": "Go home"
+    }
   }
 }

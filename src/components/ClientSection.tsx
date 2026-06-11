@@ -5,6 +5,7 @@ import { CategoryBar } from "./CategoryBar";
 import { SectorCard } from "./SectorCard";
 import { useSectors } from "@/lib/content";
 
+const clientCategories = ["Tous", "Tech", "Finance", "Santé", "Éducation", "Commerce", "Industrie"];
 
 const revealVariants: Variants = {
   hidden: { opacity: 0 },
@@ -37,7 +38,7 @@ export function ClientSection() {
         >
           {t('sections.clients')}
         </motion.h2>
-        {categories.length > 0 && <CategoryBar items={categories} />}
+        <CategoryBar items={clientCategories} />
 
         <div className="h-1 w-8 rounded-full mt-1" />
         <p className="text-lg max-w-4xl mx-auto text-center mt-6">

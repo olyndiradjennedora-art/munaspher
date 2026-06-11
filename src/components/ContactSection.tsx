@@ -8,7 +8,7 @@ import { useSectors, useServices } from "@/lib/content";
 import Reveal from "@/components/ui/Reveal";
 
 
-const contactCategories = ["Tous les secteurs", "Éducation", "Santé", "Commerce", "Technologie", "Agriculture"];
+const contactCategories = ["Tous les secteurs", "Éducation", "Santé", "Commerce", "Technologie", "Agriculture"]; // Consider moving these to translations later
 
 export function ContactSection() {
   const [firstName, setFirstName] = useState("");
@@ -54,7 +54,7 @@ export function ContactSection() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!firstName || !lastName || !phone) {
-      toast.error("Veuillez renseigner votre nom, prénom et téléphone.");
+    toast.error(t('contact.errors.missing_fields'));
       return;
     }
 
@@ -63,11 +63,11 @@ export function ContactSection() {
       const payload = { firstName, lastName, phone, sector, company, service, message };
       console.log("Contact submit", payload);
       await new Promise((r) => setTimeout(r, 700));
-      toast.success("Message envoyé — Nous vous contacterons bientôt.");
+      toast.success(t('contact.errors.send_success'));
       resetForm();
     } catch (err) {
       console.error(err);
-      toast.error("Erreur lors de l'envoi. Réessayez plus tard.");
+    toast.error(t('contact.errors.send_error'));
     } finally {
       setSubmitting(false);
     }
@@ -95,7 +95,7 @@ export function ContactSection() {
             <h2 
             style={{fontSize : "30px"}}
               className="font-display text-[clamp(2rem,4vw,3rem)] font-semibold leading-tight text-[var(--color-foreground)] mb-6">
-              Démarrons la{" "}
+              {t('contact.heading_prefix')} {" "}
               <span
                 style={{
                   background: "linear-gradient(135deg, #EA580C, #FDBA74)",
@@ -104,13 +104,13 @@ export function ContactSection() {
                   backgroundClip: "text",
                 }}
               >
-                conversation
+                {t('contact.heading_highlight')}
               </span>
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
             <p className="font-body text-[var(--color-foreground)]/80 text-[0.95rem] leading-relaxed mb-10">
-              Que vous ayez un projet précis ou que vous souhaitiez simplement explorer ce que nous pouvons faire ensemble — nous sommes là.
+              {t('contact.intro')}
             </p>
           </Reveal>
 
@@ -118,19 +118,19 @@ export function ContactSection() {
             <ul className="mt-6 space-y-3 text-sm text-hero-foreground/70">
                 <li className="flex items-center gap-3">
                   <MapPin className="w-4 h-4 text-lime shrink-0" />
-                  <span>Avenue des martyrs Stade 20.000 places Bureau N° 10</span>
+                  <span>{t('footer.address')}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-lime shrink-0" />
-                  <a href="tel:+23672267073" className="hover:text-lime transition-colors">+236 72 26 70 73 / 75 64 99 99 / 72 06 37 57</a>
+                  <a href="tel:+23672267073" className="hover:text-lime transition-colors">{t('footer.phone_display')}</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-lime shrink-0" />
-                  <a href="mailto:njanjoedimo@gmail.com" className="hover:text-lime transition-colors">njanjoedimo@gmail.com</a>
+                  <a href="mailto:njanjoedimo@gmail.com" className="hover:text-lime transition-colors">{t('footer.email_display')}</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <LocateFixed className="w-4 h-4 text-lime shrink-0" />
-                  <span>Bangui, République Centrafricaine</span>
+                  <span>{t('footer.location')}</span>
                 </li>
             </ul>
           </div>
@@ -139,22 +139,22 @@ export function ContactSection() {
         <div className="lg:col-span-3">
           <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-5 mb-5">
             <div className="col-span-1">
-              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">Prénom</label>
-              <input value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Prénom" required className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-[var(--color-card)] text-[var(--color-card-foreground)]" />
+              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">{t('contact.form.firstName')}</label>
+              <input value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder={t('contact.form.placeholders.firstName')} required className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-[var(--color-card)] text-[var(--color-card-foreground)]" />
             </div>
 
             <div className="col-span-1">
-              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">Nom</label>
-              <input value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Nom" required className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-[var(--color-card)] text-[var(--color-card-foreground)]" />
+              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">{t('contact.form.lastName')}</label>
+              <input value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder={t('contact.form.placeholders.lastName')} required className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-[var(--color-card)] text-[var(--color-card-foreground)]" />
             </div>
 
             <div className="col-span-1 md:col-span-2">
-              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">Téléphone</label>
-              <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+236 7X XX XX XX" required className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-[var(--color-card)] text-[var(--color-card-foreground)]" />
+              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">{t('contact.form.phone')}</label>
+              <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={t('contact.form.placeholders.phone')} required className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-[var(--color-card)] text-[var(--color-card-foreground)]" />
             </div>
 
             <div>
-              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">Secteur d'activité</label>
+              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">{t('contact.form.sector')}</label>
               <select value={sector} onChange={(e) => { const val = e.target.value; setSector(val); const s = sectors.find((x) => x._id === val); setCompany(s?.companies[0]?.name ?? ""); }} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-[var(--color-card)] text-[var(--color-card-foreground)]" disabled={loading}>
                 {loading && <option>Chargement…</option>}
                 {sectors.map((s) => (
@@ -164,7 +164,7 @@ export function ContactSection() {
             </div>
 
             <div>
-              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">Compagnie</label>
+              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">{t('contact.form.company')}</label>
               <select value={company} onChange={(e) => setCompany(e.target.value)} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-[var(--color-card)] text-[var(--color-card-foreground)]" disabled={loading || !sectorObj?.companies.length}>
                 {(sectorObj?.companies ?? []).map((c) => (
                   <option key={c._id} value={c.name}>{c.name}</option>
@@ -173,7 +173,7 @@ export function ContactSection() {
             </div>
 
             <div className="md:col-span-2">
-              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">Type de service souhaité</label>
+              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">{t('contact.form.service')}</label>
               <select value={service} onChange={(e) => setService(e.target.value)} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-[var(--color-card)] text-[var(--color-card-foreground)]" disabled={loading}>
                 {loading && <option>Chargement…</option>}
                 {services.map((s) => (
@@ -183,14 +183,14 @@ export function ContactSection() {
             </div>
 
             <div className="md:col-span-2">
-              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">Message</label>
-              <textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Décrivez votre projet, brief ou question..." rows={6} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-[var(--color-card)] text-[var(--color-card-foreground)]" />
+              <label className="text-xs font-semibold uppercase text-[var(--color-muted-foreground)]">{t('contact.form.message')}</label>
+              <textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder={t('contact.form.placeholders.message')} rows={6} className="mt-1 w-full rounded-lg border border-[var(--color-border)] p-3 bg-[var(--color-card)] text-[var(--color-card-foreground)]" />
             </div>
 
             <div className="md:col-span-2 flex items-center justify-between gap-4">
-              <div className="text-sm text-var-muted-foreground">Nous sommes disponibles 24h/24h.</div>
+            <div className="text-sm text-var-muted-foreground">{t('contact.available')}</div>
               <button type="submit" disabled={submitting} className="lime-btn px-6 py-3 rounded-lg font-semibold">
-                {submitting ? "Envoi..." : "Envoyer la demande"}
+              {submitting ? t('contact.errors.sending') : t('contact.errors.submit')}
               </button>
             </div>
           </form>

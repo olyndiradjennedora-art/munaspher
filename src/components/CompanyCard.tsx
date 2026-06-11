@@ -33,7 +33,7 @@ export function CompanyCard({ name, image, index = 0 }: CompanyCardProps) {
           <img
             src={imageUrl}
             alt={name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full group-hover:scale-105 transition-transform duration-200"
             onError={() => setImageError(true)}
             loading="lazy"
           />

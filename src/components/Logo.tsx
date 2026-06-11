@@ -27,7 +27,7 @@ export function Logo({ className = "" }: { className?: string }) {
       </svg>
       <div className="flex flex-col leading-tight">
         <span className="font-extrabold text-base tracking-wider uppercase" style={{ fontFamily: 'var(--font-display)' }}>
-          <span className="text-orange-500">MUNA'</span><span className="text-blue-300">SPHERE-RCA</span>
+          <span className="text-orange-500">MUNA'</span><span className="text-blue-400">SPHERE-RCA</span>
         </span>
         <span className="text-xs text-muted-foreground mt-0.5 uppercase tracking-wide text-center text-blue-300">DARE TO TAKE ACTION</span>
       </div>
