@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, LocateFixed } from "lucide-react";
+import { Facebook, Twitter, Instagram, Mail, Phone, MapPin, LocateFixed} from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from 'react-i18next';
 import { Logo } from "./Logo";
@@ -12,10 +12,10 @@ const footerColumns = [
 const bottomCategories = ["contact", "services", "projects", "team"];
 
 const socials = [
-  { Icon: Facebook, label: 'Facebook' },
-  { Icon: Twitter, label: 'Twitter' },
-  { Icon: Instagram, label: 'Instagram' },
-  { Icon: Linkedin, label: 'LinkedIn' },
+  { Icon: Facebook, label: 'Facebook' , href: 'https://www.facebook.com/munasphere'},
+  { Icon: Twitter, label: 'Twitter' , href: 'https://twitter.com/munasphere'},
+  { Icon: Instagram, label: 'Instagram' , href: 'https://www.instagram.com/munasphere'},
+  { Icon: Mail, label: 'Email' , href: 'mailto:njanjoedimo@gmail.com'},
 ];
 
 function hrefFor(key: string) {
@@ -70,8 +70,8 @@ export function FooterSection() {
             </ul>
 
               <div className="flex gap-3 mt-6">
-                {socials.map(({ Icon, label }) => (
-                  <a key={label} href="/contact" aria-label={label} className="w-9 h-9 rounded-full bg-hero-foreground/10 flex items-center justify-center hover:bg-lime hover:text-lime-foreground transition-colors">
+                {socials.map(({ Icon, label, href }) => (
+                  <a key={label} href={href} aria-label={label} className="w-9 h-9 rounded-full bg-hero-foreground/10 flex items-center justify-center hover:bg-lime hover:text-lime-foreground transition-colors">
                     <Icon className="w-4 h-4" />
                   </a>
                 ))}

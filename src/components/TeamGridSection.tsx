@@ -12,14 +12,14 @@ const teamCategories = ["LEADERSHIP", "FINANCE", "SALES", "DIGITAL", "CREATIVE",
 
 const fallbackMembers = [
   { name: "NJANJO EDIMO", role: "Directeur Général", image: team1 },
-  { name: "Carine MBOUNGANG", role: "Responsable Financière", image: team2 },
-  { name: "Jackie BAMENGUE", role: "Responsable Commercial", image: team3 },
-  { name: "Cecy Cédric LOUTOMO", role: "Responsable Digital", image: team4 },
-  { name: "Fallone DJEPENO", role: "Chef de PUB", image: team4 },
-  { name: "Brice", role: "Responsable Logistique", image: team3 },
-  { name: "Junior MAIMO", role: "Graphiste Designer", image: team2 },
-  { name: "Ella KOUNHOUA", role: "Infographiste", image: team1 },
-  { name: "Castella GOMBO", role: "Technicienne de Surface", image: team3 },
+  // { name: "Carine MBOUNGANG", role: "Responsable Financière", image: team2 },
+  // { name: "Jackie BAMENGUE", role: "Responsable Commercial", image: team3 },
+  // { name: "Cecy Cédric LOUTOMO", role: "Responsable Digital", image: team4 },
+  // { name: "Fallone DJEPENO", role: "Chef de PUB", image: team4 },
+  // { name: "Brice", role: "Responsable Logistique", image: team3 },
+  // { name: "Junior MAIMO", role: "Graphiste Designer", image: team2 },
+  // { name: "Ella KOUNHOUA", role: "Infographiste", image: team1 },
+  // { name: "Castella GOMBO", role: "Technicienne de Surface", image: team3 },
 ];
 
 type TeamMember = {
@@ -43,7 +43,7 @@ export function TeamGridSection() {
       .then((data) => {
         if (data && data.length) {
           setMembers(
-            data.map((m) => ({ name: m.name, role: m.role, image: m.photoUrl || team1 })),
+            data.map((m) => ({ name: m.name, role: m.role, image: m.photoUrl! })),
           );
         }
       })
